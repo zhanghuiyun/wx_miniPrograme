@@ -1,0 +1,51 @@
+<!-- 轮播 -->
+<view class="swiper">
+	<swiper indicator-dots="{{indicatorDots}}"
+	  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+	  	<block wx:for="{{imgUrls}}" >
+		    <swiper-item>
+		      	<image src="{{item}}" id="imgUrls{{index}}" class="slide-image"/>
+		    </swiper-item>
+	  	</block>
+	</swiper>
+</view>
+
+<!-- 店铺列表 -->
+<view class="shopContain">
+
+	<!-- 店铺列表 -->
+	<view class="shopList">
+		
+		<view class="shopItem">
+			<view class="shopInfo">
+				<view class="shopInfo_left">
+					<image src="../../images/prd-default.png"/>
+					<view class="reset">休息中</view>
+				</view>
+				<view class="shopInfo_right">
+					<view class="name">七大自营百货</view>
+					<view class="shopTime">
+						<text class="shop_time">营业时间：09：00-23：00</text>
+						<text class="shop_sell">销量<text class="shop_sellCount">80</text></text>
+					</view>
+					<view class="shopGood">
+						<text class="good">共10件商品</text>
+						<text class="price">起送费：￥0.01</text>
+					</view>
+				</view>
+			</view>
+			<view class="shopCall">
+				<view class="shopCall_left"></view>
+				<view class="shopCall_right">
+					<view class="callIcon">
+						<image src="../../images/call.png"/>
+					</view>
+					<text class="callInfo">神马鬼东西都有，满五减二大促销</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 暂无数据 -->
+	<view class="noData">还没有店铺哦</view>
+</view>

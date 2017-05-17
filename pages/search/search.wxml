@@ -1,0 +1,15 @@
+<view class="searchBanner">
+	<view class="selectSchool">
+        <span class="location" style="background: url(http://sandboxuuhuiv2.pynoo.cn//Application/Home/View/WapSchoolMarket/source/css/images/pre.png) no-repeat;background-size: contain;background-position: 50%;"></span>
+        
+    </view>
+    <view class="input">
+        <form id="search_form">
+            <input type="text" confirm-type="search" value="" id="search" />
+        </form>
+        <view class="palch">
+            <span class="search_icon"></span>
+            <text>搜索校内购商品</text>
+        </view>
+    </view>
+</view>
