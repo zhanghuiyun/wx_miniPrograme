@@ -1,4 +1,7 @@
 /*搜索学校*/
+text{
+    font-size: 14px;
+}
 .searchBanner{
 	width: 100%;
     height: 40px;
@@ -14,7 +17,7 @@
 }
 .location{
 	width: 30px;
-    height: 24px;
+    height: 20px;
     display: inline-block;
     position: absolute;
     top: 50%;
@@ -25,5 +28,292 @@
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
+.input{
+    height: 40px;
+    position: relative;
+    float: left;
+    width: 85%;
+}
+#search_form{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border-radius: 20px;
+}
+#search{
+    border: none;
+    height: 30px;
+    width: 100%;
+    padding-left: 12px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.palch{
+    position: absolute;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.38);
+    text-align: center;
+    /*width: 100%;*/
+    left: 50%;
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+.search_icon{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    top: 2.5px;
+    margin-right: 5px;
+    position: relative;
+}
+.searchText{
+    display: inline-block;
+    font-size: 14px;
+}
+/*搜索商品列表*/
+.inline_block{
+    display: inline-block;
+}
+.goodList{
+    padding-top: 48px;
+}
+.listitem{
+    padding: 16px;
+    border-bottom: 1px solid rgb(240,240,240);
+    font-size: 12px;
+    position: relative;
+    clear: both;
+    padding-bottom: 0;
+}
+.market_info{
+    width: 100%;
+    height: 60px;
+    position: relative;
+    margin-bottom: 16px;
+}
+.left{
+    width: 60px;
+    height: 60px;
+    float: left;
+    position: relative;
+    margin-right: 16px;
+}
+.left image{
+    width: 100%;
+    vertical-align: middle;
+}   
+.resets{
+    position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,0.54);
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    font-size: 14px;
+    display: inline-block;
+    right: 0;
+}
+.rights{
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+.rights_title{
+    font-size: 14px;
+    line-height: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rights_detail{
+    font-size: 10px;
+    color: rgba(0,0,0,0.54);
+    position: relative;
+    line-height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    width: 100%;
+    height: 20px;
+    padding-right: 16px;
+}
+.rights_description{
+    width: 70%;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.rights_sell{
+    display: inline-block;
+    float: right;
+}
+.market_price{
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    line-height: 14px;
+}
+.market_price1{
+    color: #f46720;
+}
+.market_price2{
+    color: rgba(0,0,0,0.38);
+    text-decoration: line-through;
+    font-size: 10px;
+    padding-left: 3px;
+}
+.item_info{
+    height: 30px;
+    overflow: hidden;
+    position: absolute;
+    width: 35%;
+    bottom: -7px;
+    right: 0;
+    text-align: right;
+    line-height:18px;
+    display: inline-block;
+    background-color: transparent;
+    font-size: 12px;
+    display: inline-block;
+}
+.reset{
+    height: 30px;
+    line-height: 30px;
+    color: rgba(0,0,0,0.38);
+    font-size: 14px;
+    display: none;
+}
+.spinner{
+    padding: 0 0 0;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    bottom: 0;
+}
+.spinner .decrease{
+    cursor: pointer;
+    text-indent: -10000px;
+    height: 30px;
+}
+.spinner button{
+    border: none;
+    width: 20px;
+    height: 20px;
+    color: #e5312a;
+    padding: 0;
+    outline: none;
+    line-height: 1;
+}
+.spinner button, .spinner .value{
+    text-align: center;
+    color: black;
+    display: block;
+    float: left;
+    height: 100%;
+    line-height: 20px;
+}
+.spinner .value{
+    width: 22px;
+    height: 20px;
+    border: none;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    padding: 0px;
+}
+.spinner .value.passive{
+    background-color: transparent;
+    font-size: 12px;
+    display: none;
+    margin-top: 2px;
+    min-height: 20px;
+}
+.spinner .increase{
+    cursor: pointer;
+    text-indent: -10000px;
+    height: 30px;
+}
+.market_limit{
+    height: 30px;
+    display: inline-block;
+    width: 100%;
+}
+.market_limit_left{
+    height: 30px;
+    float: left;
+    width: 60px;
+}
+.market_limit_right{
+    border-top: 1px dashed rgba(0,0,0,0.12);
+    margin-left: 76px;
+    line-height: 30px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.54);
+}
+.market_limit_icon{
+    background-color: #3399FF;
+    border-radius: 3px;
+    padding: 0 2px 0 3px;
+    color: #fff;
+    line-height: 14px;
+    display: inline-block;
+}
+.market_limit_count{
+    padding-left: 8px;
+    line-height: 14px;
+}
+.item_info input{
+    display: inline-block;
+    height: 20px;
+}
 
-/**/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
