@@ -1,27 +1,16 @@
-<!-- 搜索框 -->
-<view class="searchBanner">
-	<view class="selectSchool">
-        <view class="location" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/pre.png) no-repeat;background-size: contain;background-position: 50%;"></view>
-    </view>
-    <view class="input">
-        <form id="search_form">
-            <input type="text" confirm-type="search" value="" id="search" />
-        </form>
-        <view class="palch">
-            <view class="search_icon" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/search.png) no-repeat;background-size: contain;"></view>
-            <view class="searchText">搜索校内购商品</view>
-        </view>
-    </view>
-</view>
+<import src="../templete/templete.wxml" />
 
+<!-- 搜索 -->
+<template is="searchBanner" data=""></template>
 
 <!-- 搜索商品列表 -->
 <view class="goodList">
-
+    <!-- 单项商品 -->
     <view class="listitem" id="listitem338">
-
+        
+        <!-- 商品信息 -->
         <view class="market_info">
-
+            
             <view class="left">
                 <image  alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160812/4c69673628eb8271d44f6d3bddff1017.jpg@!uuhui-small" />
                 <view class="resets" style="display:none">已售空</view>
@@ -38,7 +27,8 @@
                     <view class="market_price2 inline_block">￥0.00</view>
                 </view>
             </view>
-
+            
+            <!-- 添加减少操作按钮 -->
             <view class="item_info clearfix" id="item_info338">
                 <view class="reset inline_block">休息中</view>
                 <view id="J_item338" class="spinner J_spinner inline_block" data-buycount="undefined" data-cate="198" data-goodid="338" data-stock="921" data-price="0.01" data-name="test">
@@ -49,7 +39,8 @@
             </view>
 
         </view>
-
+        
+        <!-- 限购 -->
         <view class="market_limit" id="limit338">
             <view class="market_limit_left"></view>
             <view class="market_limit_right">
@@ -58,5 +49,24 @@
             </view>
         </view>
     </view>
-
 </view>
+
+<!-- 页脚 -->
+<template is="settlement" data=""></template>
+
+<!-- 购物车 -->
+<template is="cartList" data=""></template>
+
+<!-- 蒙版 -->
+<template is="mask" data=""></template>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+/*引入模板文件样式*/
+@import "../templete/templete.wxss";
+
+
+/*公告*/
+#J_head{
+	position: relative;
+	overflow: hidden;
+	padding-top: 48px;
+}
+.notice{
+	background: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 28px;
+    height: 28px;
+}
+.notice_call{
+	display: inline-block;
+    overflow: hidden;
+    width: 14px;
+    height: 28px;
+    position: absolute;
+    margin-left: 5%;
+}
+.notice_info{
+	font-size: 12px;
+    display: inline-block;
+    width: 83%;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0;
+    width: 100%;
+    padding-left: 10%;
+    /*padding-right: 7%;*/
+}
+
+/*侧边栏*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

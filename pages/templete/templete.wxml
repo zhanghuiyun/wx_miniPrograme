@@ -1,0 +1,58 @@
+<!-- 搜索框 -->
+<template name="searchBanner">
+    <view class="searchBanner">
+        <view class="selectSchool">
+            <view class="location" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/pre.png) no-repeat;background-size: contain;background-position: 50%;"></view>
+        </view>
+        <view class="input">
+            <form id="search_form">
+                <input type="text" confirm-type="search" value="" id="search" />
+            </form>
+            <view class="palch">
+                <view class="search_icon" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/search.png) no-repeat;background-size: contain;"></view>
+                <view class="searchText">搜索校内购商品</view>
+            </view>
+        </view>
+    </view>
+</template>
+
+
+<!-- 页脚购买 -->
+<template name="settlement">
+    <view id="J_settlement" class="settlement">
+
+        <view class="settle_num">
+            <image style="width:25px;" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/cart.png" alt="" />
+            <view id="J_SelectedItemsCount" class="inline_block" style="display: inline;">83</view>
+            <view id="J_totalPrice" class="settle_price inline_block">￥10849.04</view>
+        </view>
+        <button style="height: 48px;padding: 0;text-align: center;line-height: 48px;" id="J_settleBtn" class="btn">选好了</button>
+    </view>
+</template>
+
+<!-- 购物车项列表 -->
+<template name="cartList">
+    <view class="am-cartList">
+        <view class="am-cartListHead">
+            <view class="myCart">我的篮子</view>
+            <view class="clean-cart">
+                <view class="clear inline_block">清空篮子</view>
+                <image class="deleteCart" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/delete.png" alt="" />
+            </view>
+        </view>
+        <view class="am-cartListStyle" stock="91">
+            <view class="am-cartList-title">娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃</view>
+            <view class="am-float-rt">
+                <view class="am-price" g_name="娃娃" data-price="1.00" gid="303">￥1111.00</view>
+                <image id="minus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/minus.png" alt="" />
+                <input type="number" class="am-count" confirm-type="done" disabled value="300"/>
+                <image id="plus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/plus.png" alt="" />
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 蒙版 -->
+<template name="mask">
+    <view class="mask"></view>
+</template>
