@@ -1,0 +1,69 @@
+.contain{
+	background-color: #fafafa;
+}
+/*地址*/
+.fill_address_content{
+	font-size: 14px;
+	margin-top: 0;
+}	
+.fill_address_content #J_addressFillContent{
+	padding: 0;
+    background: #fff;
+    margin-bottom: 8px;
+}
+.fill_address_content .addressInput{
+	overflow: hidden;
+    border-bottom: 1px solid #ededed;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+}
+.fill_address_content .addressInput .left{
+	float: left;
+	width: 20%;
+    text-align: left;
+    font-size: 14px;
+    color: rgba(0,0,0,0.54);
+}
+.fill_address_content .addressInput .right{
+	width: 80%;
+    text-align: left;
+    float: right;
+    height: 40px;
+}
+.fill_address_content .addressInput .right input{
+	height: 40px;
+	min-height: 40px;
+	line-height: 40px;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

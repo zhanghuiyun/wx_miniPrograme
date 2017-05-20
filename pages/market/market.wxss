@@ -6,7 +6,7 @@
 #J_head{
 	position: relative;
 	overflow: hidden;
-	padding-top: 48px;
+	padding-top: 40px;
 }
 .notice{
 	background: #fff;
@@ -36,10 +36,328 @@
     margin: 0;
     width: 100%;
     padding-left: 10%;
-    /*padding-right: 7%;*/
 }
 
 /*侧边栏*/
+.banner_left{
+	position: relative;
+    top: 0;
+    left: 0;
+    width: 18%;
+    background: #f5f5f5;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    font-size: 12px;
+    float: left;
+}
+.nav:first-child{
+	border-top: 1px solid rgb(240,240,240);
+}
+.nav{
+	border-bottom:1px solid rgb(235,235,235);
+	position: relative;
+    font-size: 12px;
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+}
+.navName{
+	padding: 16px 8px;
+	color: rgba(0,0,0,0.87);
+}
+.banner_buy_icon{
+	border-radius: 50%;
+    background: red;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    color: #fff;
+    overflow: hidden;
+    font-size: 10px;
+    text-align: center;
+    display: inline-block;
+}
+/*右侧*/
+.market_list{
+	position: relative;
+    min-height: 400px;
+    background: #fff;
+    width: 82%;
+    margin-left: 18%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.J_categoryItem{
+	position: relative;
+	overflow: hidden;
+}
+/*右侧 --- 头部*/
+.am-shopHead{
+	background-color: #f5f5f5;
+    width: 100%;
+    position: relative;
+    z-index: 500;
+    top: 0;
+    text-align: center;
+    border-left: 1px white solid;
+    height: auto;
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid rgb(240,240,240);
+}
+.volumen{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.defaultHeader{
+	border-right:1px solid #fff;
+	display: inline-block;
+	font-size: 14px;
+	width: 33%;
+	float:left;
+	z-index:10000;
+	position:relative;
+	color: #F46720;
+	margin:0;
+}
+.sale{
+	width: 33%;
+	z-index:10000;
+	display: inline-block;
+	border-right: 1px solid white;
+	font-size: 14px;
+	position:relative;
+	float:left;
+	margin:0;
+}
+.priceHeader{
+	z-index:10000;
+	width: 33%;
+	position:relative;
+	display: inline-block;
+	font-size: 14px;
+	float:left;
+	margin:0;
+}
+.priceHeader image{
+	margin-left: 8px;
+    width: 10px;
+    height: 40px;
+    float: right;
+}
+.priceHeader .priceText{
+	float: right;
+}
+.priceHeader_position{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+/*右侧 --- 下部*/
+.listitem{
+	padding: 16px;
+    border-bottom: 1px solid rgb(240,240,240);
+    font-size: 12px;
+    position: relative;
+    clear: both;
+    padding-bottom: 0;
+}
+.market_info{
+	width: 100%;
+    height: 60px;
+    position: relative;
+    margin-bottom: 16px;
+}
+.goodDeatils{
+	width: 100%;
+    height: 60px;
+    position: relative;
+}
+.left{
+	width: 60px;
+    height: 60px;
+    float: left;
+    position: relative;
+    margin-right: 16px;
+}
+.left img{
+	width: 100%;
+}
+.rights{
+	height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+.rights_title{
+	font-size: 14px;
+    line-height: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rights_detail{
+	font-size: 12px;
+    color: rgba(0,0,0,0.54);
+    position: relative;
+    line-height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    width: 100%;
+    height: 20px;
+    padding-right: 16px;
+}
+.rights_description{
+	width: 70%;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.rights_sell{
+	display: inline-block;
+    float: right;
+}
+.market_price{
+	position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    line-height: 14px;
+}
+.market_price1{
+	color: #f46720;
+}
+.market_price2{
+    color: rgba(0,0,0,0.38);
+    text-decoration: line-through;
+    font-size: 12px;
+    padding-left: 3px;
+}
+/*右侧 --- 购买数量加减*/
+.item_info{
+	height: 20px;
+    /*overflow: hidden;*/
+    position: absolute;
+    width: 35%;
+    bottom: -1px;
+    right: 0;
+}
+.reset{
+	float: right;
+    margin-right: 0;
+    font-size: 14px;
+    line-height: 14px;
+    color: rgba(0,0,0,0.38);
+    display: none;
+}
+.spinner button, .spinner .value{
+	text-align: center;
+    color: black;
+    display: block;
+    float: left;
+    height: 100%;
+    line-height: 17px;
+    margin: 0;
+}
+.spinner .value{
+	width: 20px;
+    height: 20px;
+    border: none;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 0px;
+}
+.spinner{
+	padding: 0 0 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.spinner .increase{
+	cursor: pointer;
+    text-indent: -10000px;
+}
+.spinner .decrease{
+    cursor: pointer;
+    text-indent: -10000px;
+}
+.spinner button{
+	border: none;
+    width: 20px;
+    height: 20px;
+    color: #e5312a;
+    padding: 0;
+    outline: none;
+    line-height: 1;
+    font-size: 14px;
+}
+.spinner .value.passive{
+	background-color: transparent;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: -2px;
+    min-height: 20px;
+    line-height: 20px;
+}
+.market_limit{
+	height: 30px;
+    width: 100%;
+    display: inline-block;
+}
+.market_limit_left{
+	height: 30px;
+    float: left;
+    width: 60px;
+}
+.market_limit_right{
+	border-top: 1px dashed rgba(0,0,0,0.12);
+    margin-left: 76px;
+    line-height: 30px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.54);
+}
+.market_limit_icon{
+	background-color: #3399FF;
+    border-radius: 3px;
+    padding: 0 2px 0 3px;
+    color: #fff;
+    line-height: 14px;
+    display: inline-block;
+}
+.market_limit_count{
+	padding-left: 8px;
+    line-height: 14px;
+}
+.resets{
+	position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,0.54);
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    font-size: 14px;
+    display: none;
+    right: 0;
+}
+
+
 
 
 

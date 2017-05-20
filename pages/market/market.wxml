@@ -4,20 +4,83 @@
 <template is="searchBanner" data=""></template>
 
 <!-- 公告 -->
-<view id="J_head" class="pcmaster">
+<view id="J_head" class="pcmaster" hidden="{{initStyle.isShowHeader}}">
     <view id="J_headnotice" class="notice">
-        <view class="notice_call" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/notice.png) no-repeat;background-size: contain;background-position: 50%;"></view>
-        <view class="notice_info" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/more.png)no-repeat;background-position: 85% 50%;background-size: 10px;">神马鬼东西都有，满五减二大促销</view>
+        <view class="notice_call" style="background: url('../../images/call.png') no-repeat;background-size: contain;background-position: 50%;"></view>
+        <view class="notice_info" style="background: url(../../images/more.png)no-repeat;background-position: 85% 50%;background-size: 10px;">神马鬼东西都有，满五减二大促销</view>
     </view>
 </view>
 
 <!-- 商品信息 -->
-<view id="J_main" class="pcmaster main">
-    <view id="J_bannerLeft" class="banner_left">
-        <view class="flex-wrp" style="height: 300px;flex-direction:column;">
-            <view class="flex-item bc_green">1</view>
-            <view class="flex-item bc_red">2</view>
-            <view class="flex-item bc_blue">3</view>
+<view id="J_main" class="pcmaster main" style="padding-top: {{initStyle.headPadding}};height: {{initStyle.leftHeight}};">
+
+    <!-- 分类 -->
+    <view id="J_bannerLeft" class="banner_left" style="height: {{initStyle.leftHeight}}">
+        <view class="flex-wrp" style="flex-direction:column;">
+            <view class="flex-item bc_green nav">
+                <view class="navName inline_block">1分钱</view>
+                <view id="J_leftBuy245" class="banner_buy_icon inline_block">10</view>
+            </view>
+            <view class="flex-item bc_green nav">
+                <view class="navName inline_block">潮流女装</view>
+                <view id="J_leftBuy245" class="banner_buy_icon inline_block">0</view>
+            </view>
+            <view class="flex-item bc_green nav">
+                <view class="navName inline_block">零食</view>
+                <view id="J_leftBuy245" class="banner_buy_icon inline_block">0</view>
+            </view>
+        </view>
+    </view>
+    
+    <!-- 该分类下商品列表 -->
+    <view id="J_waterflow" class="market_list" style="height: {{initStyle.leftHeight}}">
+        <view id="cat_250" class="J_categoryItem" style="height: {{initStyle.leftHeight}}"> 
+            <view class="am-shopHead">
+                <view class="volumen defaultHeader inline_block" data-volumen="0">默认</view>
+                <view class="volumen sale inline_block" data-volumen="1">销量优先</view>
+                <view class="volumen priceHeader inline_block" data-volumen="2">
+                    <view class="priceHeader_position">
+                        <image mode="aspectFit" src="../../images/sort-default.png" alt="" />
+                        <view class="priceText inline_block">价格</view>
+                    </view>
+                </view>
+            </view>
+            <view class="listitem" id="listitem356">
+                <view class="market_info">
+                    <view class="goodDeatils">
+                        <view class="left">
+                            <image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
+                            <view class="resets" style="display:none">已售空</view>
+                        </view>
+                        <view class="rights">
+                            <view class="rights_title">test5</view>
+                            <view class="rights_detail">
+                                <view class="rights_description inline_block">test</view>
+                                <view class="rights_sell inline_block">已售7</view>
+                            </view>
+                            <view class="market_price">
+                                <view class="market_price1 inline_block">￥2.00</view>
+                                <view class="market_price2 inline_block">￥2.00</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="item_info clearfix">
+                        <view class="reset inline_block">休息中</view>
+                        <view id="J_item356" class="spinner J_spinner inline_block" data-sell="7" data-limit="3" data-buycount="3" data-cate="204" data-goodid="356" data-stock="167" data-price="2.00" data-maxbuy="40">
+                            <button class="decrease J_decrease" plain style="background: url(../../images/minus.png)no-repeat;background-size: 100%;">-</button>
+                            <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
+                            <button class="increase J_increase" plain style="background: url(../../images/plus.png) no-repeat;background-size: 100%;">+</button>
+                        </view>
+                    </view> 
+                </view>
+                <view class="market_limit" id="market_limit356" style="display: block;">
+                    <view class="market_limit_left"></view>
+                    <view class="market_limit_right">
+                        <view class="market_limit_icon inline_block">限</view>
+                        <view class="market_limit_count inline_block">限购3件</view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 </view>

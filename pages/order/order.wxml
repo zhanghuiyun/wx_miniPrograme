@@ -1,0 +1,31 @@
+<view class="contain">
+	<!-- 地址 -->
+	<view class="fill_address_content">
+		<view id="J_addressFillContent">
+		    <view class="addressInput">
+		    	<view class="fl left inline_block">学校</view>
+		    	<view class="fl right inline_block">
+		        	<input class="red" type="text" id="school_name" name="school_name" placeholder-style="" placeholder="请输入学校" disabled confirm-type="done"/>
+		        </view>
+		    </view>
+		    <view class="addressInput">
+		    	<view class="fl left inline_block">电话</view>
+		    	<view class="fl right inline_block">
+		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="" value="" />
+		        </view>
+		    </view>
+		    <view class="addressInput">
+		    	<view class="fl left inline_block">姓名</view>
+		    	<view class="fl right inline_block">
+		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="" placeholder-style="" confirm-type="done" />
+		        </view>
+		    </view>
+		    <view class="addressInput">
+		    	<view class="fl left inline_block">宿舍</view>
+		    	<view class="fl right inline_block">
+		        	<textarea name="address" id="address" placeholder="楼层房间号" value="" placeholder-style="" confirm-type="done"></textarea>
+		        </view>
+		    </view>
+		</view>
+	</view>
+</view>
