@@ -1,0 +1,39 @@
+.cityList{
+	font-size: 14px;
+}
+.banner_left{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    background: #eee;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.current{
+	background: #ffffff;
+    border-left: 3px solid #F46720;
+}
+.cityItem{
+	display: block;
+    border-bottom: 1px solid #dddddd;
+    position: relative;
+    padding: 16px 8px;
+    font-size: 14px;
+}
+.market_list{
+	min-height: 400px;
+    background: #fff;
+    width: 75%;
+    margin-left: 25%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+.schoolItem{
+	display: block;
+    border-bottom: 1px solid #dddddd;
+    position: relative;
+    padding: 16px 8px;
+    font-size: 14px;
+}

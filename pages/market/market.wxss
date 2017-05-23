@@ -16,6 +16,7 @@
     font-size: 12px;
     line-height: 28px;
     height: 28px;
+    position: relative;
 }
 .notice_call{
 	display: inline-block;
@@ -36,7 +37,60 @@
     margin: 0;
     width: 100%;
     padding-left: 10%;
+    position: relative;
 }
+.seeMore{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: 15%;
+    top: 7px;
+}
+
+/*公告查看*/
+.am-poster{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(51, 51, 51, .8);
+    display: block;
+    z-index: 1300;
+    display: none;
+}
+.am-poster-content{
+    z-index: 1400;
+    color: #fff;
+}
+.am-poster-title{
+    font-size: 24px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 24px;
+}
+.am-poster-content{
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0 16px;
+    line-height: 24px;
+}
+.am-poster .am-btn{
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 36px;
+    box-shadow: 0 3px 9px black;
+    color:#888888;
+    line-height: 40px;
+    left: 42%;
+}
+
 
 /*侧边栏*/
 .banner_left{

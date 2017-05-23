@@ -290,13 +290,142 @@ text{
     display: none;
 }
 
-
-
-
-
-
-
-
+/*登录*/
+.login_mask{
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.54);
+    height: 100%;
+    z-index: 1200;
+    display: none;
+}
+.login_mask #phone_login_info{
+    position: absolute;
+    width: 65%;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding: 24px;
+}
+.login_mask .login-input{
+    width: 100%;
+    margin: auto;
+    height: 40px;
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+.login_mask .login-input input{
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid rgb(220,220,220);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.login_mask .login_btn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #f46720;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+}
+.login_mask .send_cord{
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    line-height: 40px;
+    height: 40px;
+    padding-right: 8px;
+    color: #f46720;
+    display: inline-block;
+}
+.login_mask #sendCode{
+    display: inline-block;
+}
+.login_mask #down_time_tip{
+    display: none;
+    color: #f46720;
+}
+/*绑定手机号*/
+.bind_phone{
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.54);
+    height: 100%;
+    z-index: 1200;
+    display: none;
+}
+.bind_phone #phone_login_info1{
+    position: absolute;
+    width: 65%;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding: 24px;
+}
+.bind_phone .login-input{
+    width: 100%;
+    margin: auto;
+    height: 40px;
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+.bind_phone .login-input input{
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid rgb(220,220,220);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.bind_phone .login_btn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #f46720;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+}
+.bind_phone .send_cord{
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    line-height: 40px;
+    height: 40px;
+    padding-right: 8px;
+    color: #f46720;
+    display: inline-block;
+}
+.bind_phone #sendCode1{
+    display: inline-block;
+}
+.bind_phone #down_time_tip1{
+    display: none;
+    color: #f46720;
+}
 
 
 

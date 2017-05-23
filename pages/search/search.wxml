@@ -60,6 +60,12 @@
 <!-- 蒙版 -->
 <template is="mask" data=""></template>
 
+<!-- login -->
+<template is="login" data=""></template>
+
+<!-- bind_phone -->
+<template is="bind_phone" data=""></template>
+
 
 
 

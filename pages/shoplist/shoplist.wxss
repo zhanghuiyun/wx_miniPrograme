@@ -1,6 +1,63 @@
+page{
+    background-color: #fafafa;
+}
+.swiper{
+    position: relative;
+}
 /*轮播*/
 .swiper .slide-image{
     width: 100%;
+}
+
+/*无轮播，选中学校*/
+.no_selectSchool{
+    padding: 8px 24px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+}
+.no_school_name{
+    position: relative;
+}
+.no_school_icon{
+    width: 11px;
+    height: 13px;
+    display: inline-block;
+    position: absolute;
+    bottom: 4px;
+}
+.no_name{
+    display: inline-block;
+    padding-left: 19px;
+    font-size: 12px;
+}
+
+/*有轮播的情况下选中学校*/
+.location{
+    position: absolute;
+    top: 8px;
+    background-color: rgba(0,0,0,0.54);
+    color: #fff;
+    left: 8px;
+    padding: 0 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    /* max-width: 35%; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.school_icon{
+    width: 11px;
+    height: 24px;
+    display: inline-block;
+    position: absolute;
+}
+.school_name{
+    padding-left: 19px;
+    font-size: 12px;
 }
 
 /*店铺列表*/
@@ -8,6 +65,7 @@
     margin-bottom: 8px; 
     color: rgba(0,0,0,0.87);
     font-size: 12px;
+    background-color: #fff;
 }
 .shopItem{
     padding: 16px 16px 0 16px;

@@ -1,0 +1,47 @@
+<view id="J_main" class="pcmaster main" style="height: {{initStyle.leftHeight}};">
+	<view style="height: {{initStyle.leftHeight}};" id="J_bannerLeft" class="banner_left">
+		<view class="cityList">
+			<view class="section">
+			  	<view class="flex-wrp" style="flex-direction:column;">
+			    	<view class="flex-item cityItem">
+			    		<view class="provItem_val">上海</view>
+			    	</view>
+			    	<view class="flex-item cityItem current">
+			    		<view class="provItem_val">上上海上海海</view>
+			    	</view>
+			    	<view class="flex-item cityItem">
+			    		<view class="provItem_val">上海</view>
+			    	</view>
+			    	<view class="flex-item cityItem">
+			    		<view class="provItem_val">上海</view>
+			    	</view>
+			  	</view>
+			</view>
+		</view>
+	</view>
+	<view id="J_waterflow" class="market_list" style="height: {{initStyle.leftHeight}};">
+		<view class="schoolList">
+			<view class="section">
+			  	<view class="flex-wrp" style="flex-direction:column;">
+			    	<view class="flex-item schoolItem">
+			    		<view class="provItem_val">湖北大学知行学院</view>
+			    	</view>
+			    	<view class="flex-item schoolItem">
+			    		<view class="provItem_val">湖北大学知行学院湖北大学知行学院海</view>
+			    	</view>
+			    	<view class="flex-item schoolItem">
+			    		<view class="provItem_val">湖北大学知行学院</view>
+			    	</view>
+			    	<view class="flex-item schoolItem">
+			    		<view class="provItem_val">湖北大学知行学院</view>
+			    	</view>
+			  	</view>
+			</view>
+		</view>
+
+		<view class="no_data" style="display: none;">
+			<view>没有您所在学校，请联系我们的QQ客服：400775592</view>
+		</view>
+
+	</view>
+</view>

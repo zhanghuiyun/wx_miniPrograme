@@ -1,0 +1,12 @@
+<view id="J_head" class="pcmaster" style="width: 100%;text-align:center;position: relative;">
+	<view class="head" style="background: #fff7d6;color: #F46720;font-size: 15px;height: 60px;line-height: 60px;width: 100%;">订单支付失败</view>
+</view>
+
+<view id="J_main" class="pcmaster main" style="text-align:center;">
+	<view class="submit_order_box_result c_txt" style=" background: #fff;margin-top: 32px;border-top: 1px solid #eaeaea;border-bottom: 1px solid #eaeaea;font-size: 13px;padding: 24px 0;">
+		<view>订单支付失败，感谢你的支持！</view>
+		<view style="margin-top: 16px;">
+			<view id="J_go" class="yellow" data-href="/wap.php/WapSchoolMarket/marketlist?t=wap&amp;school_id=6636&amp;shop_id=54" style="color:#ff8a00;">返回继续购买</view>
+		</view>
+	</view>
+</view>

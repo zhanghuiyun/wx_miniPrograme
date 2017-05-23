@@ -16,7 +16,6 @@
     </view>
 </template>
 
-
 <!-- 页脚购买 -->
 <template name="settlement">
     <view id="J_settlement" class="settlement">
@@ -55,4 +54,54 @@
 <!-- 蒙版 -->
 <template name="mask">
     <view class="mask"></view>
+</template>
+
+<!-- 登录 -->
+<template name="login">
+    <view class="login_mask"> 
+        <view class="phone_login_info" id="phone_login_info">
+            <form id="login_form">
+                <view class="login-input" id="login-input_phone">
+                    <input value="" name="phone" type="number" placeholder="请输入手机号码" class="am-form-field fontSize_14" id="phone_message" placeholder-style="color:rgba(0,0,0,0.38);" />
+                </view>
+                <view class="login-input" id="login-input_code">
+                    <input type="number" value="" id="cord" placeholder="手机验证码" class="am-form-field" placeholder-style="color:rgba(0,0,0,0.38);" />
+                    <view class="send_cord inline_block" id="send_cord">
+                        <view data-href="##" class="fontSize_14" id="sendCode">发送手机验证码</view>
+                        <view data-href="##" class="fontSize_14" id="down_time_tip">
+                            <view class="down_time inline_block">90</view>s后重新发送
+                        </view>
+                    </view>
+                </view>
+                <view class="login_btn_wrapper">
+                    <input type="button" value="登录" id="login_btn" class="login_btn"/>
+                </view>
+            </form>
+        </view>
+    </view>
+</template>
+
+<!-- 绑定手机号 -->
+<template name="bind_phone">
+    <view class="bind_phone"> 
+        <view class="phone_login_info" id="phone_login_info1">
+            <form id="login_form1">
+                <view class="login-input" id="login-input_phone1">
+                    <input value="" name="phone" type="number" placeholder="请输入手机号码" class="am-form-field fontSize_14" id="phone_message1" placeholder-style="color:rgba(0,0,0,0.38);" />
+                </view>
+                <view class="login-input" id="login-input_code1">
+                    <input type="number" value="" id="cord1" placeholder="手机验证码" class="am-form-field" placeholder-style="color:rgba(0,0,0,0.38);" />
+                    <view class="send_cord inline_block" id="send_cord1">
+                        <view data-href="##" class="fontSize_14" id="sendCode1">发送手机验证码</view>
+                        <view data-href="##" class="fontSize_14" id="down_time_tip1">
+                            <view class="down_time inline_block">90</view>s后重新发送
+                        </view>
+                    </view>
+                </view>
+                <view class="login_btn_wrapper">
+                    <input type="button" value="绑定手机号" id="login_btn1" class="login_btn"/>
+                </view>
+            </form>
+        </view>
+    </view>
 </template>

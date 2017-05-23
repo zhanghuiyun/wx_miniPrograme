@@ -3,29 +3,121 @@
 	<view class="fill_address_content">
 		<view id="J_addressFillContent">
 		    <view class="addressInput">
-		    	<view class="fl left inline_block">学校</view>
+		    	<view class="fl left inline_block">
+		    		<view class="inline_block left_text">学校</view>
+		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" type="text" id="school_name" name="school_name" placeholder-style="" placeholder="请输入学校" disabled confirm-type="done"/>
+		        	<input class="red" type="text" id="school_name" name="school_name" placeholder-style="color:rgba(0,0,0,0.38);" placeholder="请输入学校" disabled confirm-type="done"/>
 		        </view>
 		    </view>
 		    <view class="addressInput">
-		    	<view class="fl left inline_block">电话</view>
+		    	<view class="fl left inline_block">
+		    		<view class="inline_block left_text">电话</view>
+		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="" value="" />
+		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="color:rgba(0,0,0,0.38);" value="" />
 		        </view>
 		    </view>
 		    <view class="addressInput">
-		    	<view class="fl left inline_block">姓名</view>
+		    	<view class="fl left inline_block">
+		    		<view class="inline_block left_text">姓名</view>
+		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="" placeholder-style="" confirm-type="done" />
+		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="" placeholder-style="color:rgba(0,0,0,0.38);" confirm-type="done" />
 		        </view>
 		    </view>
-		    <view class="addressInput">
-		    	<view class="fl left inline_block">宿舍</view>
+		    <view class="addressArea">
+		    	<view class="fl left inline_block">
+		    		<view class="inline_block left_text">宿舍</view>
+		    	</view>
 		    	<view class="fl right inline_block">
-		        	<textarea name="address" id="address" placeholder="楼层房间号" value="" placeholder-style="" confirm-type="done"></textarea>
+		    		<view class="rightarea">
+		        		<textarea name="address" id="address" placeholder="楼层房间号" value="" placeholder-style="color:#c8c8c8;" confirm-type="done" />
+		        	</view>
 		        </view>
 		    </view>
 		</view>
 	</view>
+
+	<!-- 期望送达时间 -->
+	<view class="order_time clearfix">
+		<view class="fl order_time_titleCon">
+			<view class="order_time_title inline_block">期望送达时间</view>
+		</view>
+		<view class="fr time-selector" style="color: {{selectTime.timeColor}}">
+			<picker bindchange="bindPickerChange" value="{{selectTime.index}}" range="{{selectTime.array}}">
+			    <view class="picker">
+			     	{{selectTime.array[0]}}
+			    </view>
+			</picker>
+		</view>
+	</view>
+	
+	<!-- 订单留言 -->
+	<view class="submit_addre_txt_area">
+	    <view class="order_message_con">
+	    	<view class="order_message">订单留言</view>
+	    </view>
+	    <view class="order_textareaCon">
+	    	<view class="textarea">
+	    		<textarea class="txt_area" name="memo" id="memo" placeholder="选填，可填写备注事项" value="" placeholder-style="color:#c8c8c8;" confirm-type="done" />
+	    	</view>
+	    </view>
+	</view>
+	
+	<!-- 支付方式 -->
+	<view class="payType">
+		<view class="title">支付方式</view>
+		<view class="payType_select">
+			<radio-group class="radio-group" bindchange="radioChange">
+				<view class="inline">
+					<label for="">线上支付</label>
+					<radio value="0" checked="checked" color="#f46720" class="radio_pay"/>
+				</view>
+				<view class="offline">
+					<label for="">货到付款</label>
+					<radio value="1" checked="checked" color="#f46720" class="radio_pay"/>
+				</view>
+			</radio-group>
+		</view>
+	</view>
+
+	<!-- 商品 -->
+	<view class="goodList">
+		<view class="goodItem">
+			<view class="goodLeft">
+				<image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
+			</view>
+			<view class="goodRight">
+				<view class="goodRight_title">商品名称商品名称</view>
+				<view class="bottom">
+					<view class="inline_block good_price">￥1.00</view>
+					<view class="inline_block good_num">x1</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 统计 -->
+	<view class="count_total">
+		<view class="count_item">
+			<view class="inline_block item_title">商品总结</view>
+			<view class="inline_block item_price">￥1.00</view>
+		</view>
+		<view class="count_item">
+			<view class="inline_block item_title">商品总结</view>
+			<view class="inline_block item_price">￥1.00</view>
+		</view>
+		<view class="count_item">
+			<view class="inline_block item_title">商品总结</view>
+			<view class="inline_block item_price">￥1.00</view>
+		</view>
+	</view>
+
+	<!-- 页脚提交订单 -->
+	<div class="settlement">
+		<div class="settle_num">实付款：<span id="J_totalPrice" class="settle_price">¥1.00</span></div>
+		<button id="J_settleBtn" class="btn">提交订单</button>
+	</div>
+
 </view>

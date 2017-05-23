@@ -1,9 +1,12 @@
 {
   "pages":[
-    "pages/order/order",
+    "pages/shoplist/shoplist",
     "pages/market/market",
-  	"pages/search/search",
-    "pages/shoplist/shoplist"
+    "pages/selectSchool/selectSchool",
+    "pages/selectProv/selectProv",
+    "pages/order/order",
+    "pages/paySuccess/paySuccess",
+    "pages/search/search"
   ],
   
   "window":{

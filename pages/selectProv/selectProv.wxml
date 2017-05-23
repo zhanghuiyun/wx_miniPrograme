@@ -1,0 +1,9 @@
+<view class="provList">
+	<view class="section">
+	  	<view class="flex-wrp" style="flex-direction:column;">
+	    	<view class="flex-item provItem" style="font-size: 14px;height: 60px;line-height: 60px;border-bottom: 1px solid rgb(240,240,240);width: 100%;color: rgba(0,0,0,0.87);">
+	    		<view class="provItem_val" style="padding-left: 16px;">上海</view>
+	    	</view>
+	  	</view>
+	</view>
+</view>

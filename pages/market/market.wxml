@@ -6,8 +6,12 @@
 <!-- 公告 -->
 <view id="J_head" class="pcmaster" hidden="{{initStyle.isShowHeader}}">
     <view id="J_headnotice" class="notice">
-        <view class="notice_call" style="background: url('../../images/call.png') no-repeat;background-size: contain;background-position: 50%;"></view>
-        <view class="notice_info" style="background: url(../../images/more.png)no-repeat;background-position: 85% 50%;background-size: 10px;">神马鬼东西都有，满五减二大促销</view>
+        <view class="notice_call">
+            <image src="../../images/call.png" mode="aspectFit"/>
+        </view>
+        <view class="notice_info">神马鬼东西都有，满五减二大促销
+            <image src="../../images/more.png" mode="aspectFit" class="seeMore"/>
+        </view>
     </view>
 </view>
 
@@ -85,6 +89,15 @@
     </view>
 </view>
 
+<!-- 公告查看具体 -->
+<view class="am-poster">
+    <view class="am-poster-content">
+        <view class="am-poster-title">公告</view>
+        <view class="am-poster-content">公告高工啊哦噶时代发生的发生的发生的发生地方撒地方撒地方萨芬是地方撒地方萨芬萨芬萨芬萨芬撒地方撒旦发生的发生的发生</view>
+        <button class="am-btn">×</button>
+    </view>
+</view>
+
 <!-- 页脚 -->
 <template is="settlement" data=""></template>
 
@@ -93,5 +106,11 @@
 
 <!-- 蒙版 -->
 <template is="mask" data=""></template>
+
+<!-- login -->
+<template is="login" data=""></template>
+
+<!-- bind_phone -->
+<template is="bind_phone" data=""></template>
 
 
