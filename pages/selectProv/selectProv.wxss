@@ -1,0 +1,2 @@
+/*引入模板文件样式*/
+@import "../templete/templete.wxss";

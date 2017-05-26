@@ -1,7 +1,7 @@
 <import src="../templete/templete.wxml" />
 
 <!-- 搜索 -->
-<template is="searchBanner" data=""></template>
+<template is="searchBanner" data="{{searchVal}}"></template>
 
 <!-- 公告 -->
 <view id="J_head" class="pcmaster" hidden="{{initStyle.isShowHeader}}">
@@ -9,8 +9,8 @@
         <view class="notice_call">
             <image src="../../images/call.png" mode="aspectFit"/>
         </view>
-        <view class="notice_info">神马鬼东西都有，满五减二大促销
-            <image src="../../images/more.png" mode="aspectFit" class="seeMore"/>
+        <view class="notice_info">{{marketInfo.notice}}
+            <image src="../../images/more.png" mode="aspectFit" class="seeMore" catchtap="seeNotice"/>
         </view>
     </view>
 </view>
@@ -20,86 +20,85 @@
 
     <!-- 分类 -->
     <view id="J_bannerLeft" class="banner_left" style="height: {{initStyle.leftHeight}}">
-        <view class="flex-wrp" style="flex-direction:column;">
-            <view class="flex-item bc_green nav">
-                <view class="navName inline_block">1分钱</view>
-                <view id="J_leftBuy245" class="banner_buy_icon inline_block">10</view>
-            </view>
-            <view class="flex-item bc_green nav">
-                <view class="navName inline_block">潮流女装</view>
-                <view id="J_leftBuy245" class="banner_buy_icon inline_block">0</view>
-            </view>
-            <view class="flex-item bc_green nav">
-                <view class="navName inline_block">零食</view>
-                <view id="J_leftBuy245" class="banner_buy_icon inline_block">0</view>
+        <view class="flex-wrp" style="flex-direction:column;" wx:for="{{catetories}}">
+            <view class="flex-item bc_green nav {{currentItem_cate == item.category_id ? 'current' : ''}}" catchtap="getGoods" data-cateId="{{item.category_id}}">
+                <view class="navName inline_block">{{item.name}}</view>
+                <view id="J_leftBuy{{item.category_id}}" data-cateId="{{item.category_id}}" class="banner_buy_icon inline_block" wx:if="{{item.num > 0}}">{{item.num}}</view>
             </view>
         </view>
     </view>
     
     <!-- 该分类下商品列表 -->
     <view id="J_waterflow" class="market_list" style="height: {{initStyle.leftHeight}}">
-        <view id="cat_250" class="J_categoryItem" style="height: {{initStyle.leftHeight}}"> 
+        <view class="J_categoryItem" style="height: {{initStyle.leftHeight}}"> 
             <view class="am-shopHead">
-                <view class="volumen defaultHeader inline_block" data-volumen="0">默认</view>
-                <view class="volumen sale inline_block" data-volumen="1">销量优先</view>
-                <view class="volumen priceHeader inline_block" data-volumen="2">
+                <view class="volumen defaultHeader inline_block activeColor" data-volumen="0" catchtap="sort">默认</view>
+                <view class="volumen sale inline_block" data-volumen="1" catchtap="sort">销量优先</view>
+                <view class="volumen priceHeader inline_block" data-volumen="2" catchtap="sort">
                     <view class="priceHeader_position">
                         <image mode="aspectFit" src="../../images/sort-default.png" alt="" />
                         <view class="priceText inline_block">价格</view>
                     </view>
                 </view>
             </view>
-            <view class="listitem" id="listitem356">
-                <view class="market_info">
-                    <view class="goodDeatils">
-                        <view class="left">
-                            <image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
-                            <view class="resets" style="display:none">已售空</view>
+
+            <block wx:for="{{goods}}">
+                <view class="listitem" id="listitem{{item.goods_id}}" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
+                    <view class="market_info" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
+                        <view class="goodDeatils">
+                            <view class="left">
+                                <image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
+                                <view class="resets {{(item.store == 0) ? 'block' : 'hide'}}">已售空</view>
+                            </view>
+                            <view class="rights">
+                                <view class="rights_title">{{item.name}}</view>
+                                <view class="rights_detail">
+                                    <view class="rights_description inline_block">{{item.description}}</view>
+                                    <view class="rights_sell inline_block">已售{{item.buycount}}</view>
+                                </view>
+                                <view class="market_price">
+                                    <view class="market_price1 inline_block">￥{{item.price}}</view>
+                                    <view class="market_price2 inline_block" wx:if="{{item.original_price}}">￥{{item.original_price}}</view>
+                                </view>
+                            </view>
                         </view>
-                        <view class="rights">
-                            <view class="rights_title">test5</view>
-                            <view class="rights_detail">
-                                <view class="rights_description inline_block">test</view>
-                                <view class="rights_sell inline_block">已售7</view>
+                        <view class="item_info clearfix">
+                            <view class="reset inline_block {{marketInfo.is_resting ? 'block' : 'hide'}}" >休息中</view>
+                            <view id="J_item356" class="spinner J_spinner inline_block  {{marketInfo.is_resting ? 'hide' : 'block'}}" data-sell="7" data-limit="3" data-buycount="3" data-cate="204" data-goodid="356" data-stock="167" data-price="2.00" data-maxbuy="40">
+                                <button class="decrease J_decrease" plain>—</button>
+                                <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
+                                <button class="increase J_increase" plain>+</button>
                             </view>
-                            <view class="market_price">
-                                <view class="market_price1 inline_block">￥2.00</view>
-                                <view class="market_price2 inline_block">￥2.00</view>
-                            </view>
+                        </view> 
+                    </view>
+                    <view class="market_limit" id="market_limit356" style="display: block;">
+                        <view class="market_limit_left"></view>
+                        <view class="market_limit_right">
+                            <view class="market_limit_icon inline_block">限</view>
+                            <view class="market_limit_count inline_block">限购3件</view>
                         </view>
                     </view>
-                    <view class="item_info clearfix">
-                        <view class="reset inline_block">休息中</view>
-                        <view id="J_item356" class="spinner J_spinner inline_block" data-sell="7" data-limit="3" data-buycount="3" data-cate="204" data-goodid="356" data-stock="167" data-price="2.00" data-maxbuy="40">
-                            <button class="decrease J_decrease" plain style="background: url(../../images/minus.png)no-repeat;background-size: 100%;">-</button>
-                            <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
-                            <button class="increase J_increase" plain style="background: url(../../images/plus.png) no-repeat;background-size: 100%;">+</button>
-                        </view>
-                    </view> 
                 </view>
-                <view class="market_limit" id="market_limit356" style="display: block;">
-                    <view class="market_limit_left"></view>
-                    <view class="market_limit_right">
-                        <view class="market_limit_icon inline_block">限</view>
-                        <view class="market_limit_count inline_block">限购3件</view>
-                    </view>
-                </view>
+            </block>
+
+            <view class="no_data" wx:if="{{is_date}}">
+                <image src="../../images/nothing.png" mode="aspectFit" />
             </view>
         </view>
     </view>
 </view>
 
 <!-- 公告查看具体 -->
-<view class="am-poster">
+<view class="am-poster" hidden="{{is_see_notice}}">
     <view class="am-poster-content">
         <view class="am-poster-title">公告</view>
-        <view class="am-poster-content">公告高工啊哦噶时代发生的发生的发生的发生地方撒地方撒地方萨芬是地方撒地方萨芬萨芬萨芬萨芬撒地方撒旦发生的发生的发生</view>
-        <button class="am-btn">×</button>
+        <view class="am-poster-content">{{marketInfo.notice}}</view>
+        <button class="am-btn" catchtap="closeNotice">×</button>
     </view>
 </view>
 
 <!-- 页脚 -->
-<template is="settlement" data=""></template>
+<template is="settlement" data="{{marketInfo}}"></template>
 
 <!-- 购物车 -->
 <template is="cartList" data=""></template>

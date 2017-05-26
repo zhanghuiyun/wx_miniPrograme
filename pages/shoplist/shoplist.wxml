@@ -1,28 +1,30 @@
+<import src="../templete/templete.wxml" />
+
 <!-- 暂无学校 -->
-<view class="no_selectSchool selectlocation">
+<view class="no_selectSchool selectlocation" catchtap="selectSchool" wx:if="{{schoolSelect == 'top'}}">
 	<view class="no_school_name inline_block">
 	    <view class="no_school_icon inline_block">
-	    	<image src="../../images/img_run_address_black.png" mode="aspectFit"/> 
+	    	<image src="../../images/img_run_address_black.png" mode="aspectFit" bindload="imageload"/> 
 	    </view>
-	    <view class="no_name inline_block">七星大学</view>
+	    <view class="no_name inline_block">{{school_name}}</view>
 	</view>
 </view>
 
 <!-- 轮播 -->
-<view class="swiper">
-	<swiper indicator-dots="{{swiper.indicatorDots}}"
+<view class="swiper" hidden="{{has_ads}}">
+	<swiper style="height: {{swiper.swiperHeight}}px" indicator-dots="{{swiper.indicatorDots}}"
 	  autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
-	  	<block wx:for="{{swiper.imgUrls}}" >
+	  	<block wx:for="{{swiper.ads}}" >
 		    <swiper-item>
-		      	<image src="{{item}}" id="imgUrls{{index}}" class="slide-image"/>
+		      	<image src="{{item.pic}}" id="ads{{index}}" class="slide-image" mode="aspectFill"/>
 		    </swiper-item>
 	  	</block>
 	</swiper>
-	<view class="location selectlocation" catchtap="selectSchool">
+	<view class="locations selectlocation" catchtap="selectSchool" wx:if="{{schoolSelect == 'bottom'}}">
         <view class="school_icon inline_block">
         	<image src="../../images/img_run_address.png" mode="aspectFit"/> 
         </view>
-        <view class="school_name inline_block">七星大学</view>
+        <view class="school_name inline_block">{{school_name}}</view>
     </view>
 </view>
 
@@ -31,39 +33,48 @@
 
 	<!-- 店铺列表 -->
 	<view class="shopList">
-		
-		<view class="shopItem">
-			<view class="shopInfo">
-				<view class="shopInfo_left">
-					<image src="../../images/prd-default.png"/>
-					<view class="reset">休息中</view>
-				</view>
-				<view class="shopInfo_right">
-					<view class="name">七大自营百货</view>
-					<view class="shopTime">
-						<text class="shop_time">营业时间：09：00-23：00</text>
-						<text class="shop_sell">销量<text class="shop_sellCount">80</text></text>
+		<block wx:for="{{shops}}" wx:for-item="item">
+			<view class="shopItem {{item.notice ? '' : 'anotherStyle'}}" catchtap="goShop" data-shopId="{{item.shop_id}}">
+				<view class="shopInfo">
+					<view class="shopInfo_left">
+						<image wx:if="{{item.shop_header}}" src="{{item.shop_header}}"/>
+						<image wx:else src="../../images/prd-default.png"/>
+						<view class="reset" hidden="{{item.is_resting}}">休息中</view>
 					</view>
-					<view class="shopGood">
-						<text class="good">共10件商品</text>
-						<text class="price">起送费：￥0.01</text>
+					<view class="shopInfo_right">
+						<view class="name">{{item.shop_name}}</view>
+						<view class="shopTime">
+							<view class="shop_time inline_block">营业时间：{{item.start_time}} - {{item.end_time}}</view>
+							<view class="shop_sell inline_block">
+								<view class="sell_tip inline_block">销量</view>
+								<view class="shop_sellCount inline_block">{{item.buycount ? item.buycount : 0}}</view>
+							</view>
+						</view>
+						<view class="shopGood">
+							<text class="good">共{{item.goods_count}}件商品</text>
+							<text class="price">起送费￥{{item.base_price}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="shopCall" wx:if="{{item.notice}}">
+					<view class="shopCall_left"></view>
+					<view class="shopCall_right">
+						<view class="callIcon">
+							<image src="../../images/call.png"/>
+						</view>
+						<text class="callInfo">{{item.notice}}</text>
 					</view>
 				</view>
 			</view>
-			<view class="shopCall">
-				<view class="shopCall_left"></view>
-				<view class="shopCall_right">
-					<view class="callIcon">
-						<image src="../../images/call.png"/>
-					</view>
-					<text class="callInfo">神马鬼东西都有，满五减二大促销</text>
-				</view>
-			</view>
-		</view>
+		</block>
 	</view>
 
 	<!-- 暂无数据 -->
-	<view class="noData">
-		<image src="../../images/nothing.png"/>
+	<view class="noData" hidden="{{is_noData}}" style="height: {{heights}}">
+		<image src="../../images/nothing.png" mode="aspectFit" />
 	</view>
 </view>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>
+

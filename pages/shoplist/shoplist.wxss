@@ -1,8 +1,9 @@
+/*引入模板文件样式*/
+@import "../templete/templete.wxss";
+
+
 page{
     background-color: #fafafa;
-}
-.swiper{
-    position: relative;
 }
 /*轮播*/
 .swiper .slide-image{
@@ -14,7 +15,7 @@ page{
     padding: 8px 24px;
     position: relative;
     overflow: hidden;
-    display: none;
+    display: inline-block;
 }
 .no_school_name{
     position: relative;
@@ -24,7 +25,7 @@ page{
     height: 13px;
     display: inline-block;
     position: absolute;
-    bottom: 4px;
+    top: 2px;
 }
 .no_name{
     display: inline-block;
@@ -33,7 +34,7 @@ page{
 }
 
 /*有轮播的情况下选中学校*/
-.location{
+.locations{
     position: absolute;
     top: 8px;
     background-color: rgba(0,0,0,0.54);
@@ -62,7 +63,6 @@ page{
 
 /*店铺列表*/
 .shopContain{
-    margin-bottom: 8px; 
     color: rgba(0,0,0,0.87);
     font-size: 12px;
     background-color: #fff;
@@ -72,6 +72,9 @@ page{
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid rgb(220,220,220);
+}
+.anotherStyle{
+    padding:16px;
 }
 .shopInfo{
     height: 60px;
@@ -95,6 +98,7 @@ page{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 14px;
 }
 .shopInfo_right .shopTime{
     position: absolute;
@@ -102,15 +106,23 @@ page{
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     width: 100%;
+    color: rgba(0,0,0,0.54);
+    vertical-align: middle;
 }
 .shop_time{
     float: left;
+    font-size: 12px;
+    color: rgba(0,0,0,0.54);
 }
 .shop_sell{
     float: right;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgba(0,0,0,0.54);
 }
 .shopCall{
     padding: 16px 0px 0 0px;
+    color: rgba(0,0,0,0.54);
 }
 .shopCall_left{
     width: 60px;
@@ -124,16 +136,20 @@ page{
     line-height: 40px;
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgba(0,0,0,0.54);
 }
 .callIcon{
-    width: 14px;
+    width: 12px;
     height: 40px;
     display: inline-block;
     position: absolute;
+    color: rgba(0,0,0,0.54);
 }
 .callIcon image{
     width: 100%;
-    height: 14px;
+    height: 12px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -144,16 +160,24 @@ page{
 }
 .callInfo{
     padding-left: 20px;
-    width: 100%;
-    display: inline-block;
+    /*width: 100%;
+    display: inline-block;*/
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     color: rgba(0,0,0,0.54);
+    font-size: 12px;
 }
 .shop_sellCount{
     padding-left: 3px;
-    display: inline;
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: middle;
+    align-items: center;
+}
+.sell_tip{
+    font-size: 12px;
+    color: rgba(0,0,0,0.54);
 }
 .shopGood{
     position: absolute;
@@ -162,17 +186,20 @@ page{
 }
 .shopGood .good{
     float: left;
+    font-size: 12px;
+    color: rgba(0,0,0,0.54);
 }
 .shopGood .price{
     float: right;
     color: #f46720;
+    font-size: 12px;
 }
 
 /*暂无数据*/
 .noData{
-    display: none;
     width: 100%;
-    margin-top: 200px;
     text-align: center;
     font-size: 16px;
+    position: absolute;
+    top: 40px;
 }

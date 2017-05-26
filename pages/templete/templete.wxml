@@ -5,10 +5,10 @@
             <view class="location" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/pre.png) no-repeat;background-size: contain;background-position: 50%;"></view>
         </view>
         <view class="input">
-            <form id="search_form">
-                <input type="text" confirm-type="search" value="" id="search" />
+            <form id="search_form" catchtap="search">
+                <input type="text" focus="{{searchVal.focus}}" confirm-type="search" value="" id="search" bindinput="getSearchVal" bindfocus="searchFocus" bindblur="searchBlur" bindconfirm="search" />
             </form>
-            <view class="palch">
+            <view class="palch" hidden="{{searchVal.is_hide}}" catchtap="search">
                 <view class="search_icon" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/search.png) no-repeat;background-size: contain;"></view>
                 <view class="searchText">搜索校内购商品</view>
             </view>
@@ -22,10 +22,12 @@
 
         <view class="settle_num">
             <image style="width:25px;" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/cart.png" alt="" />
-            <view id="J_SelectedItemsCount" class="inline_block" style="display: inline;">83</view>
-            <view id="J_totalPrice" class="settle_price inline_block">￥10849.04</view>
+            <view id="J_SelectedItemsCount" class="inline_block {{marketInfo.cart_num <= 0 ? 'hide' : 'block'}}">{{marketInfo.cart_num}}</view>
+            <view id="J_totalPrice" class="settle_price inline_block">￥{{marketInfo.total_price}}</view>
         </view>
-        <button style="height: 48px;padding: 0;text-align: center;line-height: 48px;" id="J_settleBtn" class="btn">选好了</button>
+
+        <button style="height: 48px;padding: 0;text-align: center;line-height: 48px;" id="J_settleBtn" class="btn {{(marketInfo.is_resting || (marketInfo.total_price <= marketInfo.base_price)) ? 'btn_disabled' : ''}}">{{marketInfo.buy_tip}}</button>
+
     </view>
 </template>
 
@@ -105,3 +107,24 @@
         </view>
     </view>
 </template>
+
+<!-- messageTip -->
+<template name="messageTip">
+    <view class="messageTip" wx:if="{{error.is_error}}">
+        <view class="messageTip_content">{{error.errorContent}}</view>
+    </view>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,47 +1,38 @@
+<import src="../templete/templete.wxml" />
+
 <view id="J_main" class="pcmaster main" style="height: {{initStyle.leftHeight}};">
+
+	<!-- 城市列表 -->
 	<view style="height: {{initStyle.leftHeight}};" id="J_bannerLeft" class="banner_left">
 		<view class="cityList">
 			<view class="section">
-			  	<view class="flex-wrp" style="flex-direction:column;">
-			    	<view class="flex-item cityItem">
-			    		<view class="provItem_val">上海</view>
-			    	</view>
-			    	<view class="flex-item cityItem current">
-			    		<view class="provItem_val">上上海上海海</view>
-			    	</view>
-			    	<view class="flex-item cityItem">
-			    		<view class="provItem_val">上海</view>
-			    	</view>
-			    	<view class="flex-item cityItem">
-			    		<view class="provItem_val">上海</view>
+			  	<view class="flex-wrp" style="flex-direction:column;" wx:for="{{citys}}" wx:for-item="cityItem" >
+			    	<view class="flex-item cityItem {{currentItem == cityItem.region_id ? 'current' : 'ddd'}}" data-cityId="{{cityItem.region_id}}" catchtap="getSchool">
+			    		<view class="provItem_val">{{cityItem.local_name}}</view>
 			    	</view>
 			  	</view>
 			</view>
 		</view>
 	</view>
+	
+	<!-- 城市下的学校列表 -->
 	<view id="J_waterflow" class="market_list" style="height: {{initStyle.leftHeight}};">
 		<view class="schoolList">
 			<view class="section">
-			  	<view class="flex-wrp" style="flex-direction:column;">
-			    	<view class="flex-item schoolItem">
-			    		<view class="provItem_val">湖北大学知行学院</view>
-			    	</view>
-			    	<view class="flex-item schoolItem">
-			    		<view class="provItem_val">湖北大学知行学院湖北大学知行学院海</view>
-			    	</view>
-			    	<view class="flex-item schoolItem">
-			    		<view class="provItem_val">湖北大学知行学院</view>
-			    	</view>
-			    	<view class="flex-item schoolItem">
-			    		<view class="provItem_val">湖北大学知行学院</view>
+			  	<view class="flex-wrp" style="flex-direction:column;" wx:for="{{schools}}" wx:for-item="schoolItem">
+			    	<view class="flex-item schoolItem" catchtap="goShopList" data-schoolId="{{schoolItem.school_id}}">
+			    		<view class="provItem_val">{{schoolItem.school_name}}</view>
 			    	</view>
 			  	</view>
 			</view>
 		</view>
 
-		<view class="no_data" style="display: none;">
+		<view class="no_data" hidden="{{no_data}}">
 			<view>没有您所在学校，请联系我们的QQ客服：400775592</view>
 		</view>
 
 	</view>
 </view>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>

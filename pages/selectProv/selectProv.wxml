@@ -1,9 +1,14 @@
+<import src="../templete/templete.wxml" />
+
 <view class="provList">
 	<view class="section">
-	  	<view class="flex-wrp" style="flex-direction:column;">
-	    	<view class="flex-item provItem" style="font-size: 14px;height: 60px;line-height: 60px;border-bottom: 1px solid rgb(240,240,240);width: 100%;color: rgba(0,0,0,0.87);">
-	    		<view class="provItem_val" style="padding-left: 16px;">上海</view>
+	  	<view class="flex-wrp" style="flex-direction:column;" wx:for="{{provList}}" wx:for-item="provItem">
+	    	<view catchtap="goSchool" data-prov="{{provItem.region_id}}" class="flex-item provItem" style="font-size: 14px;height: 60px;line-height: 60px;border-bottom: 1px solid rgb(240,240,240);width: 100%;color: rgba(0,0,0,0.87);">
+	    		<view class="provItem_val" style="padding-left: 16px;">{{provItem.local_name}}</view>
 	    	</view>
 	  	</view>
 	</view>
 </view>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>
