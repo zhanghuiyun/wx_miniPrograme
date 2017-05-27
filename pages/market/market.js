@@ -22,7 +22,7 @@ Page({
         	notice : '',					//公告
         	is_resting : false,				//是否休息中
         	base_price : 0.00,				//起送价
-        	total_price : 0.00,			//购物车总价
+        	total_price : 0.00,			    //购物车总价
         	cart_num : 0,					//购物车商品总数
         	buy_tip : '选好了'    
         },		
@@ -30,7 +30,19 @@ Page({
         goods : [],						//商品
         is_date : false,				//是否含有商品
         currentItem_cate : '',    			//侧边栏当前点击项
-        is_see_notice : true
+        is_see_notice : true,
+        price_sort_dir : 0 ,   //按价格排序，展示的默认还是由高到底还是由低到高
+        current_volumen : '0',   //当前排序分类
+        goodsDetail : {			//商品详情
+        	goods: [
+                'http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg'
+            ],                              //轮播
+            indicatorDots: true,            //是否显示点
+            autoplay: true,                 //自动播放
+            interval: 2000,      
+            duration: 1000,
+            swiperHeight : 300                //轮播高度
+        }
     },
 
     search : function(event){			//搜索点击
@@ -331,6 +343,72 @@ Page({
     	_self.setData({
     		is_see_notice : true
     	})
+    },
+
+    sort : function(event){			//分类
+    	var target = event.currentTarget.dataset,       //获取当前点击事件中的data属性上的值
+            volumen = target.volumen,
+            category_id = target.cateid,
+            type = target.type,
+            _self = this,
+            param = {};
+
+        _self.setData({
+        	current_volumen : volumen
+        })
+
+        // 获取分类下商品，请求获得商品数组
+        switch(volumen){
+        	case "0" :
+        		param = {
+		        	category_id : category_id,
+		        	keyword : "",
+		        	page_index : 0,
+		        	page_size : 300
+		        }
+		        _self.setData({
+    				price_sort_dir : 0
+    			})
+        	break;
+        	case "1" :
+        		param = {
+		        	category_id : category_id,
+		        	keyword : "",
+		        	page_index : 0,
+		        	page_size : 300,
+		        	sort_type : 1
+		        }
+		        _self.setData({
+    				price_sort_dir : 0
+    			})
+        	break;
+        	case "2":
+
+        		var current_order;
+
+        		if (type === 0 || type === 1) {
+        			current_order = 2;
+        		}else if(type === 2){
+        			current_order = 1;
+        		}
+
+        		_self.setData({
+    				price_sort_dir : current_order
+    			})
+
+        		param = {
+		        	category_id : category_id,
+		        	keyword : "",
+		        	page_index : 0,
+		        	page_size : 300,
+		        	sort_type : 2,
+		        	order_type : current_order
+		        }
+        	break;
+        }
+        
+
+        _self.getGoodsRequest(param);
     }
 });
 

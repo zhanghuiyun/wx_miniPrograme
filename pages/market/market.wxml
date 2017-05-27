@@ -32,11 +32,13 @@
     <view id="J_waterflow" class="market_list" style="height: {{initStyle.leftHeight}}">
         <view class="J_categoryItem" style="height: {{initStyle.leftHeight}}"> 
             <view class="am-shopHead">
-                <view class="volumen defaultHeader inline_block activeColor" data-volumen="0" catchtap="sort">默认</view>
-                <view class="volumen sale inline_block" data-volumen="1" catchtap="sort">销量优先</view>
-                <view class="volumen priceHeader inline_block" data-volumen="2" catchtap="sort">
+                <view class="volumen defaultHeader inline_block {{current_volumen === '0' ? 'activeColor' : ''}}" data-volumen="0" catchtap="sort" data-cateId="{{currentItem_cate}}">默认</view>
+                <view class="volumen sale inline_block  {{current_volumen === '1' ? 'activeColor' : ''}}" data-volumen="1" catchtap="sort" data-cateId="{{currentItem_cate}}">销量优先</view>
+                <view class="volumen priceHeader inline_block {{current_volumen === '2' ? 'activeColor' : ''}}" data-cateId="{{currentItem_cate}}" data-volumen="2" catchtap="sort" data-type="{{price_sort_dir}}">
                     <view class="priceHeader_position">
-                        <image mode="aspectFit" src="../../images/sort-default.png" alt="" />
+                        <image wx:if="{{price_sort_dir == 0}}" mode="aspectFit" src="../../images/sort-default.png" alt="" />
+                        <image wx:elif="{{price_sort_dir == 2}}" mode="aspectFit" src="../../images/sort-down.png" alt="" />
+                        <image wx:elif="{{price_sort_dir == 1}}" mode="aspectFit" src="../../images/sort-up.png" alt="" />
                         <view class="priceText inline_block">价格</view>
                     </view>
                 </view>
@@ -47,7 +49,7 @@
                     <view class="market_info" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
                         <view class="goodDeatils">
                             <view class="left">
-                                <image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
+                                <image alt="" data-src="{{item.pics}}" src="{{item.pic}}"/>
                                 <view class="resets {{(item.store == 0) ? 'block' : 'hide'}}">已售空</view>
                             </view>
                             <view class="rights">
@@ -64,18 +66,18 @@
                         </view>
                         <view class="item_info clearfix">
                             <view class="reset inline_block {{marketInfo.is_resting ? 'block' : 'hide'}}" >休息中</view>
-                            <view id="J_item356" class="spinner J_spinner inline_block  {{marketInfo.is_resting ? 'hide' : 'block'}}" data-sell="7" data-limit="3" data-buycount="3" data-cate="204" data-goodid="356" data-stock="167" data-price="2.00" data-maxbuy="40">
+                            <view id="J_item356" class="spinner J_spinner inline_block  {{marketInfo.is_resting ? 'hide' : 'block'}}" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
                                 <button class="decrease J_decrease" plain>—</button>
                                 <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
                                 <button class="increase J_increase" plain>+</button>
                             </view>
                         </view> 
                     </view>
-                    <view class="market_limit" id="market_limit356" style="display: block;">
+                    <view class="market_limit {{(item.able_buycount) ? 'block' : 'hide'}}" id="market_limit{{item.goods_id}}">
                         <view class="market_limit_left"></view>
                         <view class="market_limit_right">
                             <view class="market_limit_icon inline_block">限</view>
-                            <view class="market_limit_count inline_block">限购3件</view>
+                            <view class="market_limit_count inline_block">限购{{item.able_buycount}}件</view>
                         </view>
                     </view>
                 </view>
@@ -94,6 +96,48 @@
         <view class="am-poster-title">公告</view>
         <view class="am-poster-content">{{marketInfo.notice}}</view>
         <button class="am-btn" catchtap="closeNotice">×</button>
+    </view>
+</view>
+
+<!-- 商品详情 -->
+<view class="goodDetailMask">
+    <view class="goodDeatil">
+        <!-- 轮播 -->
+        <view class="swiper">
+            <swiper style="height: {{goodsDetail.swiperHeight}}px" indicator-dots="{{goodsDetail.indicatorDots}}"
+              autoplay="{{goodsDetail.autoplay}}" interval="{{goodsDetail.interval}}" duration="{{goodsDetail.duration}}">
+                <block wx:for="{{goodsDetail.goods}}" >
+                    <swiper-item>
+                        <image src="{{item}}" id="goods{{index}}" class="slide-image" mode="aspectFill"/>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+        <!-- 商品信息 -->
+        <view class="goodinfo">
+            <view class="goodinfo_title">大表大表哥大表哥大表哥大表哥大表哥大表哥哥</view>
+            <view class="goodinfo_desc">描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述</view>
+            <view class="description_limit_content">
+                <view class="able_buycount inline_block">
+                    <view class="description_limit inline_block">限</view>
+                    <view class="inline_block">限购<view class="description_limit_count inline_block">2</view>件</view>
+                </view>
+                <view class="isSell inline_block">已售20</view>
+            </view>
+            <view class="am-buying">
+                <view class="price_count">
+                    <view class="am-price">￥1.00</view>
+                    <view class="origal_price inline_block">￥10.00</view>
+                </view>
+                <view class="btn-count" data-goodid="378" data-stock="179" data-price="1.00" count="0" data-buycount="2">
+                    <image class="J_decrease" src="../../images/minus.png" alt="" />
+                    <input class="am-count" disabled value="0" />
+                    <image class="J_increase" src="../../images/plus.png" alt="" />
+                </view>
+                <view class="info_reset">休息中</view>
+            </view>
+        </view>
+
     </view>
 </view>
 
