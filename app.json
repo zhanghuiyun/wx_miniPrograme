@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/market/market",
-    "pages/shoplist/shoplist",
     "pages/selectProv/selectProv",
+    "pages/shoplist/shoplist",
     "pages/selectSchool/selectSchool",
     "pages/order/order",
     "pages/paySuccess/paySuccess",

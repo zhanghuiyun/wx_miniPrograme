@@ -173,27 +173,27 @@ text{
     background-color: #fff;
     display: none;
 }
-.am-cartListHead{
+.am-cartList .am-cartListHead{
     position: relative;
     height: 36px;
     background-color: #eeeeee;
     color: #888888;
 }
-.am-cartListHead p{
+.am-cartList .am-cartListHead p{
     margin: 0;
     padding: 0 16px;
     line-height: 36px;
     font-size: 14px;
 }
-.am-cartListHead p:first-child{
+.am-cartList .am-cartListHead p:first-child{
     position: absolute;
 }
-.am-cartListHead p:last-child{
+.am-cartList .am-cartListHead p:last-child{
     position: absolute;
     right: 0;
     text-align: right;
 }
-.deleteCart{
+.am-cartList .deleteCart{
     width: 12px;
     height: 16px;
     margin-right: 6px;
@@ -201,21 +201,21 @@ text{
     display: inline-block;
     float: right;
 }
-.myCart{
+.am-cartList .myCart{
     font-size: 14px;
     height: 36px;
     line-height: 36px;
     padding-left: 16px;
     float: left;
 }
-.clear{
+.am-cartList .clear{
     float: right;
     padding-right: 16px;
     font-size: 14px;
     height: 36px;
     line-height: 36px;
 }
-.am-cartListStyle{
+.am-cartList .am-cartListStyle{
     line-height: 48px;
     height: 48px;
     position: relative;
@@ -223,7 +223,7 @@ text{
     background-color: white;
     border-bottom: 1px rgb(240,240,240) solid;
 }
-.am-cartListStyle p{
+.am-cartList .am-cartListStyle p{
     width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -233,11 +233,11 @@ text{
     line-height: 48px;
     font-size: 14px;
 }
-.am-cartListStyle p:first-child{
+.am-cartList .am-cartListStyle p:first-child{
     margin: 0;
     display: inline-block;
 }
-.am-cartList-title{
+.am-cartList .am-cartList-title{
     vertical-align: middle;
     position: absolute;
     left: 0px;
@@ -250,11 +250,11 @@ text{
     padding-left: 16px;
 }
 @media screen and (max-width: 320px){
-    .am-cartList-title{
+    .am-cartList .am-cartList-title{
         max-width: 40%;
     }
 }
-.am-float-rt{
+.am-cartList .am-float-rt{
     font-size: 14px;
     position: absolute;
     right: 0;
@@ -264,21 +264,21 @@ text{
     padding-right: 16px;
     max-width: 50%;
 }
-.am-price{
+.am-cartList .am-price{
     color: #f46720;
     vertical-align: middle;
     display: inline-block;
     float: left;
     margin-right: 16px;
 }
-.am-cartListStyle image{
+.am-cartList .am-cartListStyle image{
     width: 20px;
     display: inline-block;
     float: left;
     height: 20px;
     margin-top: 14px;
 }
-.am-count{
+.am-cartList .am-count{
     background-color: transparent;
     color: rgba(0,0,0,0.87);
     border: 0;
@@ -451,6 +451,7 @@ text{
     transform: translate(-50%,-50%);
     padding: 5px 24px;
     border-radius: 3px;
+    z-index:1500;
 }
 
 

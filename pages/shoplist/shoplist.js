@@ -44,6 +44,15 @@ Page({
     goShop : function(event){                //跳转至校内购店铺首页
         var target = event.currentTarget.dataset,   //获取当前点击事件中的data属性上的值
             shop_id = target.shopid;
+
+        wx.clearStorageSync();
+
+        // 将school_id 存在缓存中
+        wx.setStorage({
+            key : "LocationSchool",
+            data : {"school_id" : this.data.school_id}
+        })
+
         wx.navigateTo({
             url: '../market/market?school_id='+this.data.school_id+'&shop_id='+shop_id+''
         });

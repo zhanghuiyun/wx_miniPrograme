@@ -98,6 +98,8 @@ Page({
             school_id = target.schoolid,
             _self = this;
 
+        wx.clearStorageSync();
+
         // 将school_id 存在缓存中
         wx.setStorage({
             key : "LocationSchool",
@@ -108,10 +110,10 @@ Page({
         wx.redirectTo({
             url: '../shoplist/shoplist?school_id='+school_id+'',
             fail : function(){
-                console.info("ddd")
+                
             },
             success : function(){
-                console.info("ddddddd")
+                
             }
         });
     },

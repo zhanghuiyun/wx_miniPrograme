@@ -37,12 +37,26 @@ Page({
         	goods: [
                 'http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg'
             ],                              //轮播
+            is_show : true,			//是否显示商品详情
             indicatorDots: true,            //是否显示点
             autoplay: true,                 //自动播放
             interval: 2000,      
             duration: 1000,
-            swiperHeight : 300                //轮播高度
-        }
+            swiperHeight : 0,                //轮播高度
+            title : "",
+            description : "",
+            buycount : 0,
+            sell : "",
+            buy : 0,
+            index : 0,
+            price : 0,
+            oringprice : 0,
+            cate : "",
+            store : 0,
+            goods_id : ""
+        },
+ 		buy_num : [],       //已经加入购物车的商品数量
+        allGoods : []       //该店铺所有商品
     },
 
     search : function(event){			//搜索点击
@@ -88,7 +102,14 @@ Page({
     },
 
     onLoad : function(options){
-        var _self = this;
+        var _self = this,
+            school_id = options.school_id,
+            shop_id = options.shop_id;
+
+        // _self.setData({
+        //     school_id : school_id,
+        //     shop_id : shop_id
+        // })
 
         // 请求店铺信息
 		_self.marketInfo();
@@ -155,7 +176,9 @@ Page({
     },
  	
     systemInfo : function(){    //根据窗口的大小，设置相应的宽高
-    	var _self = this;
+    	var _self = this,
+            goodsDetail = _self.data.goodsDetail;
+
     	// 页面基础高度设置
       	wx.getSystemInfo({
 		  	success: function(res) {
@@ -169,8 +192,12 @@ Page({
 			  		initStyles.leftHeight = ''+(res.windowHeight - 40 - 48)+'px';
 			  		initStyles.headPadding = "40px";
 			  	}
+
+                goodsDetail.swiperHeight = res.windowWidth * 0.8;
+
 			  	_self.setData({
-		  			initStyle : initStyles
+		  			initStyle : initStyles,
+                    goodsDetail : goodsDetail
 		  		})
 		  	}
 		})
@@ -206,9 +233,10 @@ Page({
 				        	page_size : 300
 				        }
 
+                        _self.getAllGood();
+
 				        _self.getGoodsRequest(param);
-
-
+                        
 			    	}else{
 			    		//错误提示
 	                    var error = _self.data.error;
@@ -253,7 +281,8 @@ Page({
     	var _self = this;
 
     	_self.setData({
-    		currentItem_cate : param.category_id
+    		currentItem_cate : param.category_id,
+            buy_num : []
     	})
 
     	wx.request({
@@ -284,6 +313,11 @@ Page({
 		  					})
 		  				}	
 
+                        // 更新购物车
+                        _self.updateCart();
+
+                        _self.setCateNum();
+
 			    	}else{
 			    		//错误提示
 	                    var error = _self.data.error;
@@ -306,6 +340,7 @@ Page({
 		  		}
 		  	}
 		})
+
     },
 
     computeBase : function(){			//计算还差多少钱起送
@@ -409,7 +444,333 @@ Page({
         
 
         _self.getGoodsRequest(param);
+    },
+
+    closeDetail : function(){       //关闭详情
+        var _self = this,
+            data = _self.data,
+            goodsDetail = data.goodsDetail;
+
+        goodsDetail.is_show = true;
+
+        _self.setData({
+            goodsDetail : goodsDetail
+        })
+
+    },
+
+    getDetil : function(event){    //查看商品详情
+        var target = event.currentTarget.dataset,
+            sell = target.sell,
+            buycount = target.buycount,   
+            cate = target.cate,
+            goodid = target.goodid,
+            stock = target.stock,
+            price = target.price,
+            oringPrice = target.oringprice,
+            description = target.description,
+            name = target.name,
+            pics = target.pics,
+            buy = target.buy,
+            index = target.index,
+            _self = this,
+            data = _self.data,
+            goodsDetail = data.goodsDetail;
+
+        // 显示出商品详情蒙版
+        goodsDetail.is_show = false;
+        goodsDetail.goods = pics;
+        goodsDetail.sell = sell;
+        goodsDetail.buycount = buycount;
+        goodsDetail.description = description;
+        goodsDetail.title = name;
+        goodsDetail.price = price;
+        goodsDetail.oringprice = oringPrice;
+        goodsDetail.index = index;
+        goodsDetail.cate = cate;
+        goodsDetail.store = stock;
+        goodsDetail.goods_id = goodid;
+        goodsDetail.buy = buy;
+
+        // 只有一张图片的情况下不显示点
+        if (pics.length === 0) {
+            goodsDetail.indicatorDots = false;
+        }
+
+        // 计算轮播的高度
+        _self.systemInfo();
+
+        _self.setData({
+            goodsDetail : goodsDetail
+        })
+
+
+
+
+    },
+
+    decrease : function(event){     //添加购物车数量减少
+        var target = event.currentTarget.dataset,
+            buy = target.buy,           //购物车中已经存在数量
+            buycount = target.buycount,     //限购数量
+            cate = target.cate,   //分类id
+            good_id = target.goodid,     
+            index = target.index,       //商品的索引
+            name = target.name,         
+            price = target.price,
+            stock = target.stock,
+            _self = this,
+            buy_num = _self.data.buy_num;
+
+        if (buy <= 0) {
+            buy = 0;
+            buy_num[index] = buy;
+
+            _self.setData({
+                buy_num : buy_num
+            })
+
+            return;
+        }else{
+            buy -= 1;
+            buy_num[index] = buy;
+
+            _self.setData({
+                buy_num : buy_num
+            })
+
+            var param = {
+                buy : buy,
+                buycount : buycount,
+                cate : cate,
+                good_id : good_id,
+                index : index,
+                name : name,
+                price : price,
+                stock : stock
+            }
+            // 将商品存在本地缓存中
+            _self.setStoreage(param);
+
+            // 更新商品数量
+            _self.updateCart();
+
+            // 更新分类，商品总数，总价，是否可以进行购买
+            _self.setCateNum();
+        }
+    },
+
+    increase : function(event){		//添加购物车减少
+        var target = event.currentTarget.dataset,
+            buy = target.buy,           //购物车中已经存在数量
+            buycount = target.buycount,     //限购数量
+            cate = target.cate,   //分类id
+            good_id = target.goodid,     
+            index = target.index,       //商品的索引
+            name = target.name,         
+            price = target.price,
+            stock = target.stock,
+            _self = this,
+            buy_num = _self.data.buy_num;
+        if (buy >= buycount) {
+            _self.tip('每人最多只能购买'+buycount+'件');
+            return;
+        }else{
+
+            if (buy >= stock) {
+                _self.tip('库存不足');
+                return;
+            }else{
+                buy += 1;
+                buy_num[index] = buy;
+
+                _self.setData({
+                    buy_num : buy_num
+                })
+
+                var param = {
+                    buy : buy,
+                    buycount : buycount,
+                    cate : cate,
+                    good_id : good_id,
+                    index : index,
+                    name : name,
+                    price : price,
+                    stock : stock
+                }
+                // 将商品存在本地缓存中
+                _self.setStoreage(param);
+
+                // 更新商品数量
+                _self.updateCart();
+
+                // 更新分类，商品总数，总价，是否可以进行购买
+                _self.setCateNum();
+            }
+
+        }     
+    },
+
+    setStoreage : function(param){          //添加至购物车，进行存储
+
+        // 没有购买数量
+        if (param.buy == 0) {
+            wx.removeStorageSync(''+param.cate+'-'+param.good_id+'');
+        }else{
+            // 将school_id 存在缓存中
+            wx.setStorageSync(''+param.cate+'-'+param.good_id+'',param);
+        }
+    },
+
+    updateCart : function(type){            //更新购物车
+        var _self = this,
+            data = _self.data,
+            goods = data.goods,         //分类下的所有商品
+            buy_num = data.buy_num,         //购物车中的商品
+            catetories = data.catetories;   //分类
+
+        for(let k = 0 , m = catetories.length ; k < m ; k++){
+
+            // 获取当前存在本地中的商品
+            for(let i = 0 , j = goods.length ; i < j ; i++){
+                let value = wx.getStorageSync(''+goods[i].category_id+'-'+goods[i].goods_id+'');
+                
+                if (value) {
+                    // 商品数量
+                    buy_num[i] = value.buy;
+
+                }else{
+
+                    buy_num[i] = 0;
+
+                }
+
+                _self.setData({
+                    buy_num : buy_num
+                })
+                   
+            }
+        }
+    },
+
+    setCateNum : function(){        //设置分类下商品总数
+        var _self = this,
+            data = _self.data,
+            marketInfo = data.marketInfo,        //店铺信息
+            goods = data.allGoods,
+            catetories = data.catetories;   //分类
+
+        let cart_num = 0,
+            price = 0;
+
+        for(let k = 0 , m = catetories.length ; k < m ; k++){
+
+            let length = 0;
+
+            // 获取当前存在本地中的商品
+            for(let i = 0 , j = goods.length ; i < j ; i++){
+
+                // 获取已经加入购物车的商品
+                let value = wx.getStorageSync(''+catetories[k].category_id+'-'+goods[i].goods_id+'');
+
+                if (value) {
+                    // 判断商品所属分类
+                    if (catetories[k].category_id === goods[i].category_id) {
+                        length += parseInt(value.buy);
+
+                    }
+
+                    price += parseFloat(parseInt(value.buy)*parseFloat(value.price));
+
+                }
+            }
+
+
+            // 分类下购物车数量
+            catetories[k].num = length;
+
+            // 购物车总数
+            cart_num += length;
+
+            _self.setData({
+                catetories : catetories
+            });   
+
+            // 购物车总数赋值
+            if ((k + 1) === catetories.length) {
+                marketInfo.cart_num = cart_num;
+                marketInfo.total_price = price.toFixed(2);
+                _self.setData({
+                    catetories : catetories,
+                    marketInfo : marketInfo
+                }) 
+
+                _self.computeBase();
+            }   
+            
+        }
+    },
+
+    tip : function(content){    //提示信息
+        var _self = this,
+            error = _self.data.error;
+
+        error.is_error = true;
+        error.errorContent = content;
+        _self.setData({
+            error : error
+        });
+
+        //1.5s以后关闭提示框
+        setTimeout(function(){
+            error.is_error = false;
+            error.errorContent = "";
+            _self.setData({
+                error : error
+            });
+        },1500)
+    },
+
+    getAllGood : function(){
+        var _self = this,
+            data = _self.data,
+            allGoods = data.allGoods,
+            catetories = data.catetories;   //分类
+        let all = [];
+        for(let k = 0 , m = catetories.length ; k < m ; k++){
+            wx.request({
+                url: ''+_self.data.uu_Sever+'api/schoolMarket/goodsList?school_id='+_self.data.school_id+'&shop_id='+_self.data.shop_id+'',
+                method : 'GET',
+                dataType : 'json',
+                data : {
+                    category_id : catetories[k].category_id,
+                    keyword : "",
+                    page_index : 0,
+                    page_size : 300
+                },
+                success: function(res) {
+                    var res = res.data;
+                    if (res) {
+                        if (res.error === false) {
+                            let data = res.data;
+                            if (data) {
+
+                                let goods = data.goods;
+                                all = all.concat(goods);
+                                if ((k + 1) == catetories.length){
+                                    _self.setData({
+                                        allGoods : all
+                                    })
+                                }
+                            }
+
+                        }
+                    }
+                }
+            })
+        }        
     }
+
 });
 
 

@@ -454,40 +454,42 @@
     left: 50%;
     transform: translate(-50%,-50%);
     width: 80%;
-    max-height: 70%;
+    max-height: 80%;
     background-color: #fff;
     z-index: 1500;
     overflow: auto;
 }
-.goodinfo{
+.goodDetailMask .goodinfo{
     padding: 14px 16px 16px 16px;
     color: rgba(0,0,0,0.87);
     font-size: 14px;
 }
-.goodinfo_title{
+.goodDetailMask .goodinfo_title{
     width: 100%;
     font-size: 14px;
     line-height: 18px;
 }
-.goodinfo_desc{
+.goodDetailMask .goodinfo_desc{
     font-size: 12px;
     color: rgba(0,0,0,0.54);
     line-height: 16px;
     padding: 8px 0;
 }
-.description_limit_content{
+.goodDetailMask .description_limit_content{
     display: inline-block;
     font-size: 12px;
     line-height: 12px;
     width: 100%;
     padding-bottom: 8px;
+    color: rgba(0,0,0,0.54);
 }
-.able_buycount{
+.goodDetailMask .able_buycount{
     display: inline;
     padding-right: 3px;
     font-size: 12px;
+    color: rgba(0,0,0,0.54);
 }
-.description_limit{
+.goodDetailMask .description_limit{
     background-color: #3399FF;
     border-radius: 3px;
     padding: 1px 2px 0 3px;
@@ -497,7 +499,7 @@
     font-size: 12px;
     margin-right: 3px;
 }
-.isSell{
+.goodDetailMask .isSell{
     text-align: left;
     width: 30%;
     font-size: 12px;
@@ -505,13 +507,113 @@
     display: inline-block;
     border-left: 2px solid rgb(220,220,220);
     padding-left: 7px;
+    margin-left: 3px;
+    color: rgba(0,0,0,0.54);
 }
-
-
-
-
-
-
+.goodDetailMask .isSellActive{
+    margin-left: 0;
+    border-left: none;
+    padding-left: 0px;
+}
+.goodDetailMask .am-buying{
+    position: relative;
+    height: 20px;
+}
+.goodDetailMask .price_count{
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 50%;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+}
+.goodDetailMask .am-price{
+    display: inline;
+    color: #f46720;
+    margin-right:1px;
+}
+.goodDetailMask .origal_price{
+    text-decoration: line-through;
+    font-size: 12px;
+    color: rgba(0,0,0,0.54);
+}
+.goodDetailMask .btn-count{
+    text-align: right;
+    float: right;
+    height: 20px;
+}
+.goodDetailMask .btn-count image{
+    width: 20px;
+    height: 20px;
+    float: right;
+}
+.goodDetailMask .btn-count input{
+    min-height: 20px;
+    height: 20px;
+}
+.goodDetailMask .am-count{
+    min-height: 20px;
+    height: 20px;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    float: right;
+}
+.goodDetailMask .info_reset{
+    text-align: right;
+    display: inline-block;
+    color: rgba(0,0,0,0.38);
+}
+.goodDeatil_close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+}
+.goodDeatil_close image{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/*下载客户端*/
+.client-program{
+    position: fixed;
+    bottom: 56px;
+    width: 118px;
+    height: 32px;
+}
+.client-program .download-client{
+    height: 32px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 118px;
+}
+.client-program .clickContain{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 0;
+    right: 0;
+}
+.client-program .Dl_close{
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 
 

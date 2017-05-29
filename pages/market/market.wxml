@@ -17,7 +17,6 @@
 
 <!-- 商品信息 -->
 <view id="J_main" class="pcmaster main" style="padding-top: {{initStyle.headPadding}};height: {{initStyle.leftHeight}};">
-
     <!-- 分类 -->
     <view id="J_bannerLeft" class="banner_left" style="height: {{initStyle.leftHeight}}">
         <view class="flex-wrp" style="flex-direction:column;" wx:for="{{catetories}}">
@@ -45,9 +44,9 @@
             </view>
 
             <block wx:for="{{goods}}">
-                <view class="listitem" id="listitem{{item.goods_id}}" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
-                    <view class="market_info" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
-                        <view class="goodDeatils">
+                <view class="listitem" id="listitem{{item.goods_id}}">
+                    <view class="market_info">
+                        <view class="goodDeatils" catchtap="getDetil" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="{{item.pics}}" data-buy="{{buy_num[index]}}" data-index="{{index}}">
                             <view class="left">
                                 <image alt="" data-src="{{item.pics}}" src="{{item.pic}}"/>
                                 <view class="resets {{(item.store == 0) ? 'block' : 'hide'}}">已售空</view>
@@ -66,10 +65,10 @@
                         </view>
                         <view class="item_info clearfix">
                             <view class="reset inline_block {{marketInfo.is_resting ? 'block' : 'hide'}}" >休息中</view>
-                            <view id="J_item356" class="spinner J_spinner inline_block  {{marketInfo.is_resting ? 'hide' : 'block'}}" data-sell="{{item.buycount}}" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-goodid="{{item.goods_id}}" data-stock="{{item.store}}" data-price="{{item.price}}" data-oringPrice="{{item.original_price}}" data-description="{{item.description}}" data-name="{{item.name}}" data-pics="item.pics">
-                                <button class="decrease J_decrease" plain>—</button>
-                                <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
-                                <button class="increase J_increase" plain>+</button>
+                            <view id="J_item356" class="spinner J_spinner inline_block  {{marketInfo.is_resting ? 'hide' : 'block'}}" data-buycount="{{item.able_buycount}}">
+                                <button class="decrease J_decrease" plain catchtap="decrease" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.store}}" data-goodid="{{item.goods_id}}" data-buy="{{buy_num[index]}}" data-index="{{index}}" wx:if="{{buy_num[index] > 0}}">—</button>
+                                <input wx:if="{{buy_num[index] > 0}}" type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="{{buy_num[index]}}" confirm-type="done" data-index="{{index}}" />
+                                <button class="increase J_increase" plain data-buycount="{{item.able_buycount}}" data-index="{{index}}" data-cate="{{item.category_id}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.store}}" data-goodid="{{item.goods_id}}" data-buy="{{buy_num[index]}}" catchtap="increase">+</button>
                             </view>
                         </view> 
                     </view>
@@ -100,7 +99,7 @@
 </view>
 
 <!-- 商品详情 -->
-<view class="goodDetailMask">
+<view class="goodDetailMask" hidden="{{goodsDetail.is_show}}">
     <view class="goodDeatil">
         <!-- 轮播 -->
         <view class="swiper">
@@ -112,34 +111,46 @@
                     </swiper-item>
                 </block>
             </swiper>
+
+            <view class="goodDeatil_close" catchtap="closeDetail">
+                <image mode="aspectFit" src="../../images/closeInfo.png"/>
+            </view>
         </view>
         <!-- 商品信息 -->
         <view class="goodinfo">
-            <view class="goodinfo_title">大表大表哥大表哥大表哥大表哥大表哥大表哥哥</view>
-            <view class="goodinfo_desc">描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述</view>
+            <view class="goodinfo_title">{{goodsDetail.title}}</view>
+            <view class="goodinfo_desc">{{goodsDetail.description}}</view>
             <view class="description_limit_content">
-                <view class="able_buycount inline_block">
+                <view class="able_buycount inline_block {{(!goodsDetail.buycount || goodsDetail.buycount == 0) ? 'hide' : 'block'}}">
                     <view class="description_limit inline_block">限</view>
-                    <view class="inline_block">限购<view class="description_limit_count inline_block">2</view>件</view>
+                    <view class="inline_block">限购<view class="description_limit_count inline_block">{{goodsDetail.buycount}}</view>件</view>
                 </view>
-                <view class="isSell inline_block">已售20</view>
+                <view class="isSell inline_block {{(!goodsDetail.buycount || goodsDetail.buycount == 0) ? 'isSellActive' : ''}}">已售{{goodsDetail.sell}}</view>
             </view>
             <view class="am-buying">
                 <view class="price_count">
-                    <view class="am-price">￥1.00</view>
-                    <view class="origal_price inline_block">￥10.00</view>
+                    <view class="am-price">￥{{goodsDetail.price}}</view>
+                    <view class="origal_price inline_block" wx:if="{{goodsDetail.oringprice}}">￥{{goodsDetail.oringprice}}</view>
                 </view>
-                <view class="btn-count" data-goodid="378" data-stock="179" data-price="1.00" count="0" data-buycount="2">
-                    <image class="J_decrease" src="../../images/minus.png" alt="" />
-                    <input class="am-count" disabled value="0" />
-                    <image class="J_increase" src="../../images/plus.png" alt="" />
+                <view class="btn-count">
+                    <image class="J_increase" src="../../images/plus.png" alt="" catchtap="increase" data-buycount="{{goodsDetail.buycount}}" data-cate="{{goodsDetail.cate}}" data-name="{{goodsDetail.title}}" data-price="{{goodsDetail.price}}" data-stock="{{goodsDetail.store}}" data-goodid="{{goodsDetail.goods_id}}" data-buy="{{buy_num[goodsDetail.index]}}" data-index="{{goodsDetail.index}}" />
+                    <input class="am-count" wx:if="{{buy_num[goodsDetail.index] > 0}}" disabled value="{{buy_num[goodsDetail.index]}}" confirm-type="done" data-index="{{goodsDetail.index}}" />
+                    <image class="J_decrease" src="../../images/minus.png" alt="" catchtap="decrease" data-buycount="{{goodsDetail.buycount}}" data-cate="{{goodsDetail.cate}}" data-name="{{goodsDetail.title}}" data-price="{{goodsDetail.price}}" data-stock="{{goodsDetail.store}}" data-goodid="{{goodsDetail.goods_id}}" data-buy="{{buy_num[goodsDetail.index]}}" data-index="{{goodsDetail.index}}" wx:if="{{buy_num[goodsDetail.index] > 0}}" />
                 </view>
-                <view class="info_reset">休息中</view>
+                <view class="info_reset {{marketInfo.is_resting ? 'block' : 'hide'}}">休息中</view>
             </view>
         </view>
 
     </view>
 </view>
+
+<!-- 下载客户端 -->
+<!-- <view class="client-program">
+    <image class="download-client" mode="aspectFit" src="../../images/client-download.png" alt="" />
+    <view class="clickContain"> 
+        <image class="Dl_close" mode="aspectFit" src="../../images/close-download.png" alt="" />
+    </view>
+</view> -->
 
 <!-- 页脚 -->
 <template is="settlement" data="{{marketInfo}}"></template>
@@ -155,5 +166,8 @@
 
 <!-- bind_phone -->
 <template is="bind_phone" data=""></template>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>
 
 
