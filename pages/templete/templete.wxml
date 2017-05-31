@@ -1,12 +1,12 @@
 <!-- 搜索框 -->
 <template name="searchBanner">
     <view class="searchBanner">
-        <view class="selectSchool">
+        <view class="selectSchool" catchtap="return">
             <view class="location" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/pre.png) no-repeat;background-size: contain;background-position: 50%;"></view>
         </view>
         <view class="input">
             <form id="search_form" catchtap="search">
-                <input type="text" focus="{{searchVal.focus}}" confirm-type="search" value="" id="search" bindinput="getSearchVal" bindfocus="searchFocus" bindblur="searchBlur" bindconfirm="search" />
+                <input type="text" focus="{{searchVal.focus}}" confirm-type="search" value="{{searchVal.val}}" id="search" bindinput="getSearchVal" bindfocus="searchFocus" bindblur="searchBlur" bindconfirm="searchNav" confirm-hold="true"/>
             </form>
             <view class="palch" hidden="{{searchVal.is_hide}}" catchtap="search">
                 <view class="search_icon" style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/search.png) no-repeat;background-size: contain;"></view>
@@ -21,7 +21,7 @@
     <view id="J_settlement" class="settlement">
 
         <view class="settle_num">
-            <image style="width:25px;" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/cart.png" alt="" />
+            <image style="width:25px;" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/cart.png" alt="" catchtap="showCart"/>
             <view id="J_SelectedItemsCount" class="inline_block {{marketInfo.cart_num <= 0 ? 'hide' : 'block'}}">{{marketInfo.cart_num}}</view>
             <view id="J_totalPrice" class="settle_price inline_block">￥{{marketInfo.total_price}}</view>
         </view>
@@ -33,21 +33,21 @@
 
 <!-- 购物车项列表 -->
 <template name="cartList">
-    <view class="am-cartList">
+    <view class="am-cartList" hidden="{{cart.is_hide}}">
         <view class="am-cartListHead">
             <view class="myCart">我的篮子</view>
-            <view class="clean-cart">
+            <view class="clean-cart" catchtap="clearCart">
                 <view class="clear inline_block">清空篮子</view>
                 <image class="deleteCart" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/delete.png" alt="" />
             </view>
         </view>
-        <view class="am-cartListStyle" stock="91">
-            <view class="am-cartList-title">娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃娃</view>
+        <view class="am-cartListStyle" wx:for="{{cart.list}}">
+            <view class="am-cartList-title">{{item.name}}</view>
             <view class="am-float-rt">
-                <view class="am-price" g_name="娃娃" data-price="1.00" gid="303">￥1111.00</view>
-                <image id="minus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/minus.png" alt="" />
-                <input type="number" class="am-count" confirm-type="done" disabled value="300"/>
-                <image id="plus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/plus.png" alt="" />
+                <view class="am-price">￥{{item.price}}</view>
+                <image id="minus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/minus.png" alt="" data-name="{{item.name}}" data-price="{{}}" data-good="" catchtap="decrease" data-buycount="{{item.buycount}}" data-cate="{{item.cate}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.stock}}" data-goodid="{{item.good_id}}" data-buy="{{cart.buy_num[item.good_id]}}" data-from="cart"  wx:if="{{cart.buy_num[item.good_id] > 0}}"/>
+                <input type="number" class="am-count" confirm-type="done" disabled value="{{cart.buy_num[item.good_id]}}" wx:if="{{cart.buy_num[item.good_id] > 0}}"/>
+                <image id="plus" src="http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/plus.png" alt="" catchtap="increase" data-buycount="{{item.buycount}}" data-cate="{{item.cate}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.stock}}" data-goodid="{{item.good_id}}" data-from="cart" data-buy="{{cart.buy_num[item.good_id]}}" />
             </view>
         </view>
     </view>
@@ -55,7 +55,7 @@
 
 <!-- 蒙版 -->
 <template name="mask">
-    <view class="mask"></view>
+    <view class="mask" hidden='{{cart.is_hide}}' catchtap="closeMask"></view>
 </template>
 
 <!-- 登录 -->

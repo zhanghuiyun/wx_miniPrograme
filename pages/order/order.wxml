@@ -47,7 +47,7 @@
 		<view class="fr time-selector" style="color: {{selectTime.timeColor}}">
 			<picker bindchange="bindPickerChange" value="{{selectTime.index}}" range="{{selectTime.array}}">
 			    <view class="picker">
-			     	{{selectTime.array[0]}}
+			     	{{selectTime.array[selectTime.index]}}
 			    </view>
 			</picker>
 		</view>

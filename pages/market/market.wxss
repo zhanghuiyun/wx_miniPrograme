@@ -3,9 +3,11 @@
 
 /*公告*/
 #J_head{
-	position: relative;
+	position: fixed;
 	overflow: hidden;
-	padding-top: 40px;
+	top: 40px;
+    z-index: 1500;
+    width: 100%;
 }
 .notice{
 	background: #fff;
@@ -93,7 +95,7 @@
 
 /*侧边栏*/
 .banner_left{
-	position: relative;
+	position: fixed;
     top: 0;
     left: 0;
     width: 18%;
@@ -144,6 +146,7 @@
     width: 82%;
     margin-left: 18%;
     overflow: auto;
+    padding-top: 40px;
 }
 .J_categoryItem{
 	position: relative;
@@ -152,8 +155,8 @@
 /*右侧 --- 头部*/
 .am-shopHead{
 	background-color: #f5f5f5;
-    width: 100%;
-    position: relative;
+    width: 82%;
+    position: fixed;
     z-index: 500;
     top: 0;
     text-align: center;

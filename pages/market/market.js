@@ -2,9 +2,11 @@ var app = getApp();
 Page({
     data: {
     	initStyle : {                  //初始化样式设置参数
-    		leftHeight : "opx",        //内容块左侧的高度，y轴超出滚动，x轴超出掩藏
+    		leftHeight : "0px",        //内容块左侧的高度，y轴超出滚动，x轴超出掩藏
         	isShowHeader : false,      //公告是否显示
-        	headPadding : "0px"        //公告显示掩藏时候，内容块的padding
+        	headPadding : "0px",        //公告显示掩藏时候，内容块的padding
+            volumenTop : '68px',
+            leftHeight_content : '0px'
     	},
     	shop_id : 54,				   //店铺id
     	school_id : 6636,			   //学校id
@@ -48,15 +50,30 @@ Page({
             buycount : 0,
             sell : "",
             buy : 0,
-            index : 0,
             price : 0,
             oringprice : 0,
             cate : "",
             store : 0,
             goods_id : ""
         },
- 		buy_num : [],       //已经加入购物车的商品数量
-        allGoods : []       //该店铺所有商品
+ 		buy_num : {},       //已经加入购物车的商品数量
+        allGoods : [],       //该店铺所有商品
+        cart : {     //templete中使用的购物车参数
+            list : [],
+            is_hide : true,
+            buy_num : {}
+        },   //购物车中的商品项
+        login : {   //登录信息
+            user_id : 1588,
+            source : 2,
+            username : "18850524539"
+        }
+    },
+
+    return : function(){    //返回上一级
+        wx.redirectTo({
+            url: '../shoplist/shoplist?school_id='+this.data.school_id+''
+        }) 
     },
 
     search : function(event){			//搜索点击
@@ -71,6 +88,31 @@ Page({
     	})
     },
 
+    searchNav : function(event){
+        let _self = this,
+            data = _self.data,
+            shop_id = data.shop_id,
+            school_id = data.school_id,
+            searchVal = data.searchVal,
+            search_val = searchVal.val;
+
+        wx.navigateTo({
+            url: '../search/search?keyword='+search_val+'&shop_id='+shop_id+'&school_id='+school_id+''
+        })
+    },
+
+    searchFocus : function(){   //搜索获取焦点的时候
+        var _self = this,
+            searchVal = _self.data.searchVal;
+
+        searchVal.focus = true;
+        searchVal.is_hide = true;
+
+        _self.setData({
+            searchVal : searchVal
+        })    
+    },
+
     searchBlur : function(){			//搜索失去焦点的时候
 
     	var _self = this,
@@ -78,10 +120,10 @@ Page({
 
     	searchVal.focus = false;
 
-    	if (searchVal.val === "") {
-    		searchVal.is_hide = false;
-    	}else{
+    	if (searchVal.val) {
     		searchVal.is_hide = true;
+    	}else{
+    		searchVal.is_hide = false;
     	}
 
     	_self.setData({
@@ -104,7 +146,22 @@ Page({
     onLoad : function(options){
         var _self = this,
             school_id = options.school_id,
-            shop_id = options.shop_id;
+            shop_id = options.shop_id,
+            type = options.type;
+
+        if (type === 'search') {
+    
+        }else{
+            // 循环缓存项
+            let res = wx.getStorageInfoSync(),
+                keys = res.keys;
+
+            for(let k = 0 , m = keys.length ; k < m ; k++){
+                if (keys[k].indexOf('-') > 0) {
+                    wx.removeStorageSync(keys[k]);
+                }
+            }
+        }
 
         // _self.setData({
         //     school_id : school_id,
@@ -129,6 +186,9 @@ Page({
 		  		if (res) {
 		  			if (res.error === false) {
 		  				var data = res.data;
+
+                        wx.removeStorageSync('marketInfo');
+                        wx.setStorageSync('marketInfo',data);
 
 			    		var marketInfo = _self.data.marketInfo,
 			    			initStyle = _self.data.initStyle;
@@ -187,10 +247,14 @@ Page({
 			  	// 有公告时候内容块显示高度
 			  	if (_self.data.initStyle.isShowHeader === false) {
 			  		initStyles.leftHeight = ''+(res.windowHeight - 40 - 48 - 28)+'px';
-			  		initStyles.headPadding = "0px";
+			  		initStyles.headPadding = "68px";
+                    initStyles.volumenTop = '68px';
+                    initStyles.leftHeight_content = ''+(res.windowHeight - 40 - 48 - 28 - 40)+'px';
 			  	}else{   //没公告时候内容块显示高度
 			  		initStyles.leftHeight = ''+(res.windowHeight - 40 - 48)+'px';
 			  		initStyles.headPadding = "40px";
+                    initStyles.volumenTop = '40px';
+                    initStyles.leftHeight_content = ''+(res.windowHeight - 40 - 48 - 40)+'px';
 			  	}
 
                 goodsDetail.swiperHeight = res.windowWidth * 0.8;
@@ -225,6 +289,9 @@ Page({
 		  					catetories : catetories
 		  				})
 
+                        wx.removeStorageSync('catetories');
+                        wx.setStorageSync('catetories',catetories);
+
 		  				// 默认第一项点击
 		  				var param = {
 				        	category_id : catetories[0].category_id,
@@ -233,6 +300,7 @@ Page({
 				        	page_size : 300
 				        }
 
+                        wx.removeStorageSync('allGoods');
                         _self.getAllGood();
 
 				        _self.getGoodsRequest(param);
@@ -282,7 +350,7 @@ Page({
 
     	_self.setData({
     		currentItem_cate : param.category_id,
-            buy_num : []
+            buy_num : {}
     	})
 
     	wx.request({
@@ -340,7 +408,6 @@ Page({
 		  		}
 		  	}
 		})
-
     },
 
     computeBase : function(){			//计算还差多少钱起送
@@ -456,7 +523,6 @@ Page({
         _self.setData({
             goodsDetail : goodsDetail
         })
-
     },
 
     getDetil : function(event){    //查看商品详情
@@ -472,7 +538,6 @@ Page({
             name = target.name,
             pics = target.pics,
             buy = target.buy,
-            index = target.index,
             _self = this,
             data = _self.data,
             goodsDetail = data.goodsDetail;
@@ -486,7 +551,6 @@ Page({
         goodsDetail.title = name;
         goodsDetail.price = price;
         goodsDetail.oringprice = oringPrice;
-        goodsDetail.index = index;
         goodsDetail.cate = cate;
         goodsDetail.store = stock;
         goodsDetail.goods_id = goodid;
@@ -503,10 +567,6 @@ Page({
         _self.setData({
             goodsDetail : goodsDetail
         })
-
-
-
-
     },
 
     decrease : function(event){     //添加购物车数量减少
@@ -515,16 +575,16 @@ Page({
             buycount = target.buycount,     //限购数量
             cate = target.cate,   //分类id
             good_id = target.goodid,     
-            index = target.index,       //商品的索引
             name = target.name,         
             price = target.price,
             stock = target.stock,
+            type = target.from,   //是哪里的加减
             _self = this,
             buy_num = _self.data.buy_num;
 
         if (buy <= 0) {
             buy = 0;
-            buy_num[index] = buy;
+            buy_num.good_id = buy;
 
             _self.setData({
                 buy_num : buy_num
@@ -533,7 +593,7 @@ Page({
             return;
         }else{
             buy -= 1;
-            buy_num[index] = buy;
+            buy_num[good_id] = buy;
 
             _self.setData({
                 buy_num : buy_num
@@ -544,7 +604,6 @@ Page({
                 buycount : buycount,
                 cate : cate,
                 good_id : good_id,
-                index : index,
                 name : name,
                 price : price,
                 stock : stock
@@ -557,6 +616,11 @@ Page({
 
             // 更新分类，商品总数，总价，是否可以进行购买
             _self.setCateNum();
+
+            if (type === "cart") {
+                // 更新购物车数量
+                _self.getCartList();
+            }
         }
     },
 
@@ -571,7 +635,9 @@ Page({
             price = target.price,
             stock = target.stock,
             _self = this,
+            type = target.from,   //是哪里的加减
             buy_num = _self.data.buy_num;
+
         if (buy >= buycount) {
             _self.tip('每人最多只能购买'+buycount+'件');
             return;
@@ -582,7 +648,7 @@ Page({
                 return;
             }else{
                 buy += 1;
-                buy_num[index] = buy;
+                buy_num[good_id] = buy;
 
                 _self.setData({
                     buy_num : buy_num
@@ -593,7 +659,6 @@ Page({
                     buycount : buycount,
                     cate : cate,
                     good_id : good_id,
-                    index : index,
                     name : name,
                     price : price,
                     stock : stock
@@ -606,6 +671,12 @@ Page({
 
                 // 更新分类，商品总数，总价，是否可以进行购买
                 _self.setCateNum();
+
+                if (type === "cart") {
+                    // 更新购物车数量
+                    _self.getCartList();
+                }
+                
             }
 
         }     
@@ -625,7 +696,7 @@ Page({
     updateCart : function(type){            //更新购物车
         var _self = this,
             data = _self.data,
-            goods = data.goods,         //分类下的所有商品
+            goods = data.allGoods,         //分类下的所有商品
             buy_num = data.buy_num,         //购物车中的商品
             catetories = data.catetories;   //分类
 
@@ -635,13 +706,15 @@ Page({
             for(let i = 0 , j = goods.length ; i < j ; i++){
                 let value = wx.getStorageSync(''+goods[i].category_id+'-'+goods[i].goods_id+'');
                 
+                var key = goods[i].goods_id;
+
                 if (value) {
                     // 商品数量
-                    buy_num[i] = value.buy;
+                    buy_num[key] = value.buy;
 
                 }else{
 
-                    buy_num[i] = 0;
+                    buy_num[key] = 0;
 
                 }
 
@@ -711,6 +784,76 @@ Page({
         }
     },
 
+    showCart : function(event){    //查看购物车
+        var _self = this,
+            data = _self.data;
+
+        _self.getCartList();   //获取购物车商品列表
+
+        let cart = data.cart,
+            list = cart.list;
+
+        // //购物车是否有商品
+        // if (list.length === 0) {
+        //     cart.is_hide = true;
+        //     _self.tip("购物车还没有商品哦");
+        // }else{
+        //     cart.is_hide = false;
+        // }
+
+        _self.setData({
+            cart : cart
+        })
+    },
+
+    getCartList : function(){   //获取购物车商品列表
+        var _self = this,
+            data = _self.data,
+            goods = data.allGoods,
+            cart = data.cart,   
+            buy_num = data.buy_num,
+            catetories = data.catetories;   //分类
+
+        let _cart = [];  //临时存放购物车中的数组
+
+        for(let k = 0 , m = catetories.length ; k < m ; k++){
+
+            let length = 0;
+
+            // 获取当前存在本地中的商品
+            for(let i = 0 , j = goods.length ; i < j ; i++){
+
+                // 获取已经加入购物车的商品
+                let value = wx.getStorageSync(''+catetories[k].category_id+'-'+goods[i].goods_id+'');
+
+                if (value) {
+                    _cart.push(value);
+                }
+            }
+
+            // 购物车总数赋值
+            if ((k + 1) === catetories.length) {
+                cart.list = _cart;
+                cart.buy_num = buy_num;
+
+                // 判断购物车中是否还有商品
+                if (_cart.length === 0) {
+                    _self.tip("购物车中没有商品");
+                    cart.is_hide = true;
+                }else{
+                    cart.is_hide = false;
+                }
+
+                _self.setData({
+                    cart : cart
+                }) 
+
+                console.info(buy_num)
+            }   
+            
+        }
+    },
+
     tip : function(content){    //提示信息
         var _self = this,
             error = _self.data.error;
@@ -757,10 +900,13 @@ Page({
 
                                 let goods = data.goods;
                                 all = all.concat(goods);
+
                                 if ((k + 1) == catetories.length){
                                     _self.setData({
                                         allGoods : all
                                     })
+
+                                    wx.setStorageSync('allGoods', all);
                                 }
                             }
 
@@ -769,8 +915,70 @@ Page({
                 }
             })
         }        
-    }
+    },
 
+    clearCart : function(event){   //清楚购物车缓存
+
+        var _self = this,
+            data = _self.data,
+            goods = data.allGoods,
+            cart = data.cart,   
+            buy_num = data.buy_num,
+            catetories = data.catetories;   //分类
+
+        let _cart = [];  //临时存放购物车中的数组
+
+        wx.showModal({
+            title: '清除购物车',
+            content: '确定要清除购物车？',
+            success: function(res) {
+                if (res.confirm) {
+                    for(let k = 0 , m = catetories.length ; k < m ; k++){
+
+                        let length = 0;
+
+                        // 获取当前存在本地中的商品
+                        for(let i = 0 , j = goods.length ; i < j ; i++){
+
+                            // 获取已经加入购物车的商品
+                            let value = wx.getStorageSync(''+catetories[k].category_id+'-'+goods[i].goods_id+'');
+
+                            if (value) {
+                                wx.removeStorageSync(''+catetories[k].category_id+'-'+goods[i].goods_id+'');
+                            }
+                        }
+
+                        // 购物车总数赋值
+                        if ((k + 1) === catetories.length) {
+                            // 更新商品数量
+                            _self.updateCart();
+
+                            // 更新分类，商品总数，总价，是否可以进行购买
+                            _self.setCateNum();
+
+                            // 更新购物车数量
+                            _self.getCartList();
+                        }   
+                        
+                    }
+
+                } else if (res.cancel) {
+                    
+                }
+            }
+        })
+    },
+
+    closeMask : function(event){         //关闭购物车外的蒙版
+        var _self = this,
+            cart = _self.data.cart;
+
+        cart.is_hide = true;
+
+        _self.setData({
+            cart : cart
+        })
+    }
 });
 
 

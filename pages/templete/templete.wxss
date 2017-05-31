@@ -171,7 +171,6 @@ text{
     bottom: 48px;
     z-index: 1100;
     background-color: #fff;
-    display: none;
 }
 .am-cartList .am-cartListHead{
     position: relative;
@@ -264,6 +263,11 @@ text{
     padding-right: 16px;
     max-width: 50%;
 }
+.am-cartList .clean-cart{
+    position: relative;
+    height: 36px;
+    float: right;
+}
 .am-cartList .am-price{
     color: #f46720;
     vertical-align: middle;
@@ -299,7 +303,6 @@ text{
     top: 0;
     background-color: rgba(0,0,0,0.54);
     z-index: 1000;
-    display: none;
 }
 
 /*登录*/

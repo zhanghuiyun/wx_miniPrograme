@@ -1,70 +1,81 @@
 <import src="../templete/templete.wxml" />
 
 <!-- 搜索 -->
-<template is="searchBanner" data=""></template>
+<template is="searchBanner" data="{{searchVal}}"></template>
 
 <!-- 搜索商品列表 -->
 <view class="goodList">
     <!-- 单项商品 -->
-    <view class="listitem" id="listitem338">
-        
-        <!-- 商品信息 -->
-        <view class="market_info">
-            
-            <view class="left">
-                <image  alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160812/4c69673628eb8271d44f6d3bddff1017.jpg@!uuhui-small" />
-                <view class="resets" style="display:none">已售空</view>
-            </view>
+    <view class="section">
+        <scroll-view scroll-y="true" style="height: {{_height}}px" lower-threshold="30"  bindscrolltolower="lower">
+            <view class="listitem scroll-view-item" wx:for="{{goods}}">
+                
+                <!-- 商品信息 -->
+                <view class="market_info">
+                    
+                    <view class="left">
+                        <image  alt="" data-src="{{item.pics}}" src="{{item.pic}}" />
+                        <view class="resets {{(item.store == 0) ? 'block' : 'hide'}}">已售空</view>
+                    </view>
 
-            <view class="rights">
-                <view class="rights_title" id="item_name338">test</view>
-                <view class="rights_detail">
-                    <view class="rights_description inline_block">abcdefg</view>
-                    <view class="rights_sell inline_block">已售91</view>
-                </view>
-                <view class="market_price">
-                    <view class="market_price1 inline_block" id="price338">￥0.01</view>
-                    <view class="market_price2 inline_block">￥0.00</view>
-                </view>
-            </view>
-            
-            <!-- 添加减少操作按钮 -->
-            <view class="item_info clearfix" id="item_info338">
-                <view class="reset inline_block">休息中</view>
-                <view id="J_item338" class="spinner J_spinner inline_block" data-buycount="undefined" data-cate="198" data-goodid="338" data-stock="921" data-price="0.01" data-name="test">
-                    <button class="decrease J_decrease" plain style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/minus.png)no-repeat;background-size: 100%;background-position: 50%;">-</button>
-                    <input type="number" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="0" style="display: inline-block;" confirm-type="done"/>
-                    <button class="increase J_increase" plain style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/plus.png)no-repeat;background-size: 100%;background-position: 50%;">+</button>
-                </view>
-            </view>
+                    <view class="rights">
+                        <view class="rights_title" id="item_name338">{{item.name}}</view>
+                        <view class="rights_detail">
+                            <view class="rights_description inline_block">{{item.description}}</view>
+                            <view class="rights_sell inline_block">已售{{item.buycount}}</view>
+                        </view>
+                        <view class="market_price">
+                            <view class="market_price1 inline_block" id="price338">￥{{item.price}}</view>
+                            <view class="market_price2 inline_block" wx:if="{{item.original_price}}">￥{{item.original_price}}</view>
+                        </view>
+                    </view>
+                    
+                    <!-- 添加减少操作按钮 -->
+                    <view class="item_info clearfix" id="item_info338">
+                        <view class="reset inline_block {{marketInfo.is_resting ? 'block' : 'hide'}}">休息中</view>
+                        <view class="spinner J_spinner inline_block {{marketInfo.is_resting ? 'hide' : 'block'}}" data-buycount="{{item.able_buycount}}">
+                            <button class="decrease J_decrease" plain style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/minus.png)no-repeat;background-size: 100%;background-position: 50%;" catchtap="decrease" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.store}}" data-goodid="{{item.goods_id}}" data-buy="{{buy_num[item.goods_id]}}" wx:if="{{buy_num[item.goods_id]}}">-</button>
+                            <input type="number" wx:if="{{buy_num[item.goods_id] > 0}}" class="J_spinnerExample spinnerExample value passive" maxlength="3" disabled value="{{buy_num[item.goods_id]}}" style="display: inline-block;" confirm-type="done"/>
+                            <button class="increase J_increase" plain style="background: url(http://sandboxuuhuiv2.pynoo.cn/Application/Home/View/WapSchoolMarket/source/css/images/plus.png)no-repeat;background-size: 100%;background-position: 50%;" data-buycount="{{item.able_buycount}}" data-cate="{{item.category_id}}" data-name="{{item.name}}" data-price="{{item.price}}" data-stock="{{item.store}}" data-goodid="{{item.goods_id}}" data-buy="{{buy_num[item.goods_id]}}" catchtap="increase">+</button>
+                        </view>
+                    </view>
 
-        </view>
-        
-        <!-- 限购 -->
-        <view class="market_limit" id="limit338">
-            <view class="market_limit_left"></view>
-            <view class="market_limit_right">
-                <view class="market_limit_icon inline_block">限</view>
-                <view class="market_limit_count inline_block">每人限量0件</view>
+                </view>
+                
+                <!-- 限购 -->
+                <view class="market_limit {{item.able_buycount ? 'block' : 'hide'}}">
+                    <view class="market_limit_left"></view>
+                    <view class="market_limit_right">
+                        <view class="market_limit_icon inline_block">限</view>
+                        <view class="market_limit_count inline_block">限购{{item.able_buycount}}件</view>
+                    </view>
+                </view>
             </view>
-        </view>
+        </scroll-view>
+    </view>
+
+    <view class="no_data" hidden="{{is_date}}">
+        <image src="../../images/nothing.png" mode="aspectFit" />
     </view>
 </view>
 
 <!-- 页脚 -->
-<template is="settlement" data=""></template>
+<template is="settlement" data="{{marketInfo}}"></template>
 
 <!-- 购物车 -->
-<template is="cartList" data=""></template>
+<template is="cartList" data="{{cart}}"></template>
 
 <!-- 蒙版 -->
-<template is="mask" data=""></template>
+<template is="mask" data="{{cart}}"></template>
 
 <!-- login -->
 <template is="login" data=""></template>
 
 <!-- bind_phone -->
 <template is="bind_phone" data=""></template>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>
 
 
 

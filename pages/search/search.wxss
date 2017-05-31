@@ -7,6 +7,7 @@
 }
 .goodList{
     padding-top: 48px;
+    padding-bottom : 48px;
 }
 .listitem{
     padding: 16px;
@@ -164,7 +165,7 @@
     background-color: transparent;
     font-size: 12px;
     display: none;
-    margin-top: 2px;
+    margin-top: 5px;
     min-height: 20px;
 }
 .spinner .increase{
@@ -206,7 +207,22 @@
     height: 20px;
 }
 
+/*显示掩藏*/
+.hide{
+    display: none !important;
+}
+.block{
+    display: inline-block !important;
+}
 
+/*暂无数据*/
+.no_data{
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 
 

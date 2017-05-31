@@ -45,7 +45,15 @@ Page({
         var target = event.currentTarget.dataset,   //获取当前点击事件中的data属性上的值
             shop_id = target.shopid;
 
-        wx.clearStorageSync();
+        // 循环缓存项
+        let res = wx.getStorageInfoSync(),
+            keys = res.keys;
+
+        for(let k = 0 , m = keys.length ; k < m ; k++){
+            if (keys[k].indexOf('-') > 0) {
+                wx.removeStorageSync(keys[k]);
+            }
+        }
 
         // 将school_id 存在缓存中
         wx.setStorage({
