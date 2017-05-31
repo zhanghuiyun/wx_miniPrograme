@@ -26,7 +26,7 @@
             <view id="J_totalPrice" class="settle_price inline_block">￥{{marketInfo.total_price}}</view>
         </view>
 
-        <button style="height: 48px;padding: 0;text-align: center;line-height: 48px;" id="J_settleBtn" class="btn {{(marketInfo.is_resting || (marketInfo.total_price < marketInfo.base_price)) ? 'btn_disabled' : ''}}">{{marketInfo.buy_tip}}</button>
+        <button catchtap="createOrder" style="height: 48px;padding: 0;text-align: center;line-height: 48px;" id="J_settleBtn" class="btn {{(marketInfo.is_resting || (marketInfo.total_price < marketInfo.base_price)) ? 'btn_disabled' : ''}}">{{marketInfo.buy_tip}}</button>
 
     </view>
 </template>

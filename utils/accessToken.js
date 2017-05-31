@@ -1,4 +1,4 @@
-var utilMd5 = require('../md5.js');  
+var utilMd5 = require('../utils/md5.js');  
 
 function getAccessToken(apiUrl,url,user_id,method,param,run,time,username,source){
 
@@ -75,6 +75,9 @@ function getAccessToken(apiUrl,url,user_id,method,param,run,time,username,source
 		  	header: header,
 		  	success: function(res) {
 		    	run(res.data);
+		  	},
+		  	error : function(){
+		  		console.info("access_token_error")
 		  	}
 		});
 	} 
