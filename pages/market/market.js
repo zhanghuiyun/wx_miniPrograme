@@ -156,7 +156,7 @@ Page({
             searchVal = data.searchVal,
             search_val = searchVal.val;
 
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../search/search?keyword='+search_val+'&shop_id='+shop_id+'&school_id='+school_id+''
         })
     },

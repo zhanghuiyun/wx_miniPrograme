@@ -58,7 +58,7 @@
     height: 100%;
     background-color: rgba(51, 51, 51, .8);
     display: block;
-    z-index: 1300;
+    z-index: 1700;
 }
 .am-poster-content{
     z-index: 1400;

@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/order/order",
     "pages/market/market",
+    "pages/order/order",
     "pages/search/search",
     "pages/selectProv/selectProv",
     "pages/shoplist/shoplist",

@@ -14,7 +14,7 @@ Page({
     	var target = event.currentTarget.dataset,   //获取当前点击事件中的data属性上的值
             proviceId = target.prov;
         
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../selectSchool/selectSchool?province_id='+proviceId+''
         });
     },

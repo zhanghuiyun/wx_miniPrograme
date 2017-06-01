@@ -1,3 +1,6 @@
+/*引入模板文件样式*/
+@import "../templete/templete.wxss";
+
 page{
 	background-color: #fafafa;
 }
@@ -40,14 +43,20 @@ page{
 	line-height: 40px;
 	display: inline-block;
 	width: 100%;
+	padding-left: 3px;
 }
-.fill_address_content textarea{
-	width: 100%;
-	height: 48px;
+.fill_address_content .addressArea .right textarea{
+	width:100%;
+	height:48px;
+	padding-top:0px;
+	display:inline-block;
+	/*border: 1px solid red;*/
+	padding-bottom: 0px
 }
 .fill_address_content .rightarea{
-	padding-top: 12px;
 	padding-right: 16px;
+	position:relative;
+	height: 60px;
 }
 .fill_address_content .addressArea{
 	height: 60px;
@@ -55,6 +64,9 @@ page{
     border-bottom: 1px solid rgb(240,240,240);
     position: relative;
 }
+/*.fill_address_content .addressArea .right{
+	height: 60px;
+}*/
 .addressArea .left{
 	line-height: 40px
 }
@@ -114,7 +126,7 @@ page{
 	overflow: auto;
 }
 .order_textareaCon .textarea{
-	padding-top: 12px;
+	padding-top: 13px;
 	padding-left: 16px;
 	position: relative;
 	padding-right: 16px;
@@ -223,7 +235,7 @@ page{
 	font-size: 14px;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: 48px;
+	padding-bottom: 48px;
 }
 .count_item{
 	width: 100%;

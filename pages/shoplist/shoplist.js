@@ -36,7 +36,7 @@ Page({
 
     selectSchool : function(event){        //选择学校
         var _school_id = this.data.school_id;
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../selectProv/selectProv?school_id='+_school_id+''
         });
     },
@@ -61,7 +61,7 @@ Page({
             data : {"school_id" : this.data.school_id}
         })
 
-        wx.navigateTo({
+        wx.redirectTo({
             url: '../market/market?school_id='+this.data.school_id+'&shop_id='+shop_id+''
         });
     },

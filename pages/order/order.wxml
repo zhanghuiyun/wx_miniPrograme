@@ -9,7 +9,7 @@
 		    		<view class="inline_block left_text">学校</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" value="{{address.school_name}}" type="text" id="school_name" name="school_name" placeholder-style="color:rgba(0,0,0,0.38);" placeholder="请输入学校" disabled />
+		        	<input class="red" value="{{address.school_name}}" type="text" id="school_name" name="school_name" placeholder-style="color:rgba(0,0,0,0.38);" placeholder="请输入学校" disabled/>
 		        </view>
 		    </view>
 		    <view class="addressInput">
@@ -17,7 +17,7 @@
 		    		<view class="inline_block left_text">电话</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="color:rgba(0,0,0,0.38);" value="{{address.mobile}}" />
+		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="color:rgba(0,0,0,0.38);" value="{{address.mobile}}" bindinput="mobile"/>
 		        </view>
 		    </view>
 		    <view class="addressInput">
@@ -25,7 +25,7 @@
 		    		<view class="inline_block left_text">姓名</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="{{address.name}}" placeholder-style="color:rgba(0,0,0,0.38);" confirm-type="done" />
+		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="{{address.name}}" placeholder-style="color:rgba(0,0,0,0.38);" confirm-type="done" bindinput="name"/>
 		        </view>
 		    </view>
 		    <view class="addressArea">
@@ -34,7 +34,7 @@
 		    	</view>
 		    	<view class="fl right inline_block">
 		    		<view class="rightarea">
-		        		<textarea name="address" id="address" placeholder="楼层房间号" value="{{address.addrss}}" placeholder-style="color:#c8c8c8;" confirm-type="done" />
+		        		<textarea name="address" style="padding-top:{{padding_top}};padding-bottom: {{padding_top}};padding-left: {{padding_left}}" id="address" placeholder="楼层房间号" value="{{address.addrss}}" placeholder-style="color:#c8c8c8;" confirm-type="done" bindinput="addrsss"/>
 		        	</view>
 		        </view>
 		    </view>
@@ -61,8 +61,8 @@
 	    	<view class="order_message">订单留言</view>
 	    </view>
 	    <view class="order_textareaCon">
-	    	<view class="textarea">
-	    		<textarea class="txt_area" name="memo" id="memo" placeholder="选填，可填写备注事项" value="" placeholder-style="color:#c8c8c8;" confirm-type="done" />
+	    	<view class="textarea" style="padding-bottom: {{padding_top}};padding-top: {{padding_top}};">
+	    		<textarea class="txt_area" name="memo" id="memo" placeholder="选填，可填写备注事项" value="" placeholder-style="color:#c8c8c8;" confirm-type="done" bindinput="message"/>
 	    	</view>
 	    </view>
 	</view>
@@ -72,11 +72,11 @@
 		<view class="title">支付方式</view>
 		<view class="payType_select">
 			<radio-group class="radio-group" bindchange="radioChange">
-				<view class="inline">
+				<view class="inline" hidden="{{payType.is_show}}">
 					<label for="">线上支付</label>
 					<radio value="1" checked="checked" color="#f46720" class="radio_pay"/>
 				</view>
-				<view class="offline">
+				<view class="offline" hidden="{{payType.is_overPay}}">
 					<label for="">货到付款</label>
 					<radio value="4" color="#f46720" class="radio_pay"/>
 				</view>
@@ -111,7 +111,7 @@
 	<!-- 页脚提交订单 -->
 	<div class="settlement">
 		<div class="settle_num">实付款：<span id="J_totalPrice" class="settle_price">¥{{total_pay}}</span></div>
-		<button id="J_settleBtn" class="btn">提交订单</button>
+		<button id="J_settleBtn" class="btn" catchtap="createOrder">提交订单</button>
 	</div>
 
 </view>
