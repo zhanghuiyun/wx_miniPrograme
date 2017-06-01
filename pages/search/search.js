@@ -1,4 +1,6 @@
-var app = getApp();
+var app = getApp(),
+    accessToken = require('../../utils/accessToken.js');  
+
 Page({
     data: {
         _height : 0,    //商品列表的高度
@@ -35,7 +37,71 @@ Page({
             list : [],
             is_hide : true,
             buy_num : {}
-        }   //购物车中的商品项
+        },   //购物车中的商品项
+        login : {   //登录信息
+            user_id : 1588,
+            source : 2,
+            username : "18850524539"
+        }
+    },
+
+
+    createOrder : function(event){           //选好了，立即购买，授权
+        let param = {},
+            _self = this,
+            _date = _self.data,
+            school_id = _date.school_id,
+            shop_id = _date.shop_id,
+            goodArr = [],
+            login = _date.login,
+            res = wx.getStorageInfoSync();   //缓存信息
+
+        param.school_id = school_id;
+        param.shop_id = shop_id;
+        param.pay_type = "1";
+        
+        // 获取当前店铺购物车中的所有商品
+        if (res) {
+            let keys = res.keys;
+            for(let k = 0 , m = keys.length ; k < m ; k++){
+                if (keys[k].indexOf('-') > 0) {
+                    let goodObj = {},
+                        value = wx.getStorageSync(keys[k]);
+
+                    goodObj.goods_id = value.good_id;
+                    goodObj.num = value.buy;
+
+                    goodArr.push(goodObj);
+                }
+
+            }
+        }
+
+        param.goods = goodArr;
+
+        // 时间撮
+        let timestamp = parseInt(new Date().getTime()/1000);
+
+        // 授权
+        accessToken.getAccessToken(_date.uu_Sever,'api/order/schoolMarket/preview',login.user_id,'POST',param,_self.preview,timestamp,login.username,login.source);
+
+    },
+
+    preview : function(res){    //订单预览
+        let _self = this,
+            _date = _self.data,
+            school_id = _date.school_id,
+            shop_id = _date.shop_id;
+
+        if (res.error === false) {
+            // 跳转至订单预览页面
+            wx.redirectTo({
+                url : '../order/order?shop_id='+shop_id+'&school_id='+school_id+''
+            })
+
+        }else{
+            _self.tip(res.detail);
+        }
     },
 
     return : function(){    //返回上一级
@@ -444,7 +510,6 @@ Page({
         }
         
         _self.getGoodList(param);
-
     },
 
     increase : function(event){		//添加购物车减少

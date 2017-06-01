@@ -122,7 +122,7 @@ Page({
         if (res.error === false) {
             // 跳转至订单预览页面
             wx.redirectTo({
-                url : '../../order/order?shop_id='+shop_id+'&school_id='+school_id+''
+                url : '../order/order?shop_id='+shop_id+'&school_id='+school_id+''
             })
 
         }else{

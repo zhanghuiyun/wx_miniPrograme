@@ -109,7 +109,7 @@ text{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     height: 48px;
-    z-index: 1100;
+    z-index: 1600;
 }
 .settle_num{
     float: left;
@@ -169,7 +169,7 @@ text{
     overflow-y: auto;
     overflow-x: hidden;
     bottom: 48px;
-    z-index: 1100;
+    z-index: 1600;
     background-color: #fff;
 }
 .am-cartList .am-cartListHead{
@@ -302,7 +302,7 @@ text{
     height: 100%;
     top: 0;
     background-color: rgba(0,0,0,0.54);
-    z-index: 1000;
+    z-index: 1500;
 }
 
 /*登录*/

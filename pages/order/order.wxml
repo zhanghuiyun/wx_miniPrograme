@@ -1,3 +1,5 @@
+<import src="../templete/templete.wxml" />
+
 <view class="contain">
 	<!-- 地址 -->
 	<view class="fill_address_content">
@@ -7,7 +9,7 @@
 		    		<view class="inline_block left_text">学校</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" type="text" id="school_name" name="school_name" placeholder-style="color:rgba(0,0,0,0.38);" placeholder="请输入学校" disabled confirm-type="done"/>
+		        	<input class="red" value="{{address.school_name}}" type="text" id="school_name" name="school_name" placeholder-style="color:rgba(0,0,0,0.38);" placeholder="请输入学校" disabled />
 		        </view>
 		    </view>
 		    <view class="addressInput">
@@ -15,7 +17,7 @@
 		    		<view class="inline_block left_text">电话</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="color:rgba(0,0,0,0.38);" value="" />
+		        	<input type="number" id="ship_mobile" name="ship_mobile" confirm-type="done" placeholder="请输入手机号" placeholder-style="color:rgba(0,0,0,0.38);" value="{{address.mobile}}" />
 		        </view>
 		    </view>
 		    <view class="addressInput">
@@ -23,7 +25,7 @@
 		    		<view class="inline_block left_text">姓名</view>
 		    	</view>
 		    	<view class="fl right inline_block">
-		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="" placeholder-style="color:rgba(0,0,0,0.38);" confirm-type="done" />
+		        	<input class="red" type="text" id="ship_name" name="ship_name" placeholder="请输入姓名" value="{{address.name}}" placeholder-style="color:rgba(0,0,0,0.38);" confirm-type="done" />
 		        </view>
 		    </view>
 		    <view class="addressArea">
@@ -32,7 +34,7 @@
 		    	</view>
 		    	<view class="fl right inline_block">
 		    		<view class="rightarea">
-		        		<textarea name="address" id="address" placeholder="楼层房间号" value="" placeholder-style="color:#c8c8c8;" confirm-type="done" />
+		        		<textarea name="address" id="address" placeholder="楼层房间号" value="{{address.addrss}}" placeholder-style="color:#c8c8c8;" confirm-type="done" />
 		        	</view>
 		        </view>
 		    </view>
@@ -72,11 +74,11 @@
 			<radio-group class="radio-group" bindchange="radioChange">
 				<view class="inline">
 					<label for="">线上支付</label>
-					<radio value="0" checked="checked" color="#f46720" class="radio_pay"/>
+					<radio value="1" checked="checked" color="#f46720" class="radio_pay"/>
 				</view>
 				<view class="offline">
 					<label for="">货到付款</label>
-					<radio value="1" checked="checked" color="#f46720" class="radio_pay"/>
+					<radio value="4" color="#f46720" class="radio_pay"/>
 				</view>
 			</radio-group>
 		</view>
@@ -84,15 +86,15 @@
 
 	<!-- 商品 -->
 	<view class="goodList">
-		<view class="goodItem">
+		<view class="goodItem" wx:for="{{goods}}">
 			<view class="goodLeft">
-				<image alt="" data-src="" src="http://hyimage.uulian.com/uuhui/20160908/2cec198cc4498ed4442acba08fcb2f63.jpg@!uuhui-small" />
+				<image alt="" data-src="" src="{{item.pic}}" />
 			</view>
 			<view class="goodRight">
-				<view class="goodRight_title">商品名称商品名称</view>
+				<view class="goodRight_title">{{item.name}}</view>
 				<view class="bottom">
-					<view class="inline_block good_price">￥1.00</view>
-					<view class="inline_block good_num">x1</view>
+					<view class="inline_block good_price">￥{{item.price}}</view>
+					<view class="inline_block good_num">x{{item.num}}</view>
 				</view>
 			</view>
 		</view>
@@ -100,24 +102,19 @@
 
 	<!-- 统计 -->
 	<view class="count_total">
-		<view class="count_item">
-			<view class="inline_block item_title">商品总结</view>
-			<view class="inline_block item_price">￥1.00</view>
-		</view>
-		<view class="count_item">
-			<view class="inline_block item_title">商品总结</view>
-			<view class="inline_block item_price">￥1.00</view>
-		</view>
-		<view class="count_item">
-			<view class="inline_block item_title">商品总结</view>
-			<view class="inline_block item_price">￥1.00</view>
+		<view class="count_item" wx:for="{{money_items}}">
+			<view class="inline_block item_title">{{item.title}}</view>
+			<view class="inline_block item_price">￥{{item.money}}</view>
 		</view>
 	</view>
 
 	<!-- 页脚提交订单 -->
 	<div class="settlement">
-		<div class="settle_num">实付款：<span id="J_totalPrice" class="settle_price">¥1.00</span></div>
+		<div class="settle_num">实付款：<span id="J_totalPrice" class="settle_price">¥{{total_pay}}</span></div>
 		<button id="J_settleBtn" class="btn">提交订单</button>
 	</div>
 
 </view>
+
+<!-- 错误提示 -->
+<template is="messageTip" data="{{error}}"></template>
