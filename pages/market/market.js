@@ -141,7 +141,7 @@ Page({
         let timestamp = parseInt(new Date().getTime()/1000);
 
         // 授权
-        //accessToken.getAccessToken(_date.uu_Sever,'api/order/schoolMarket/preview',login.user_id,'POST',param,_self.preview,timestamp,login.username,login.source);
+        accessToken.getAccessToken(_date.uu_Sever,'api/order/schoolMarket/preview',login.user_id,'POST',param,_self.preview,timestamp,login.username,login.source);
 
     },
 
