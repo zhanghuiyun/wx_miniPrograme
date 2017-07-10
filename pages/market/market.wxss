@@ -449,7 +449,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 1400;
+    z-index: 1700;
 }
 .goodDetailMask .goodDeatil{
     position: absolute;
@@ -572,6 +572,7 @@
 }
 .goodDetailMask .info_reset{
     text-align: right;
+    width : 100%;
     display: inline-block;
     color: rgba(0,0,0,0.38);
 }

@@ -132,7 +132,7 @@
                     <view class="am-price">￥{{goodsDetail.price}}</view>
                     <view class="origal_price inline_block" wx:if="{{goodsDetail.oringprice}}">￥{{goodsDetail.oringprice}}</view>
                 </view>
-                <view class="btn-count">
+                <view class="btn-count {{marketInfo.is_resting ? 'hide' : 'block'}}">
                     <image class="J_increase" src="../../images/plus.png" alt="" catchtap="increase" data-buycount="{{goodsDetail.buycount}}" data-cate="{{goodsDetail.cate}}" data-name="{{goodsDetail.title}}" data-price="{{goodsDetail.price}}" data-stock="{{goodsDetail.store}}" data-goodid="{{goodsDetail.goods_id}}" data-buy="{{buy_num[goodsDetail.goods_id]}}" />
                     <input class="am-count" wx:if="{{buy_num[goodsDetail.goods_id] > 0}}" disabled value="{{buy_num[goodsDetail.goods_id]}}" confirm-type="done"/>
                     <image class="J_decrease" src="../../images/minus.png" alt="" catchtap="decrease" data-buycount="{{goodsDetail.buycount}}" data-cate="{{goodsDetail.cate}}" data-name="{{goodsDetail.title}}" data-price="{{goodsDetail.price}}" data-stock="{{goodsDetail.store}}" data-goodid="{{goodsDetail.goods_id}}" data-buy="{{buy_num[goodsDetail.goods_id]}}" wx:if="{{buy_num[goodsDetail.goods_id] > 0}}" />

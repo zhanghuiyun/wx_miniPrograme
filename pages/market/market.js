@@ -59,13 +59,13 @@ Page({
             goods_id : ""
         },
  		buy_num : {},       //已经加入购物车的商品数量
-        allGoods : [],       //该店铺所有商品
-        cart : {     //templete中使用的购物车参数
+        allGoods : [],      //该店铺所有商品
+        cart : {            //templete中使用的购物车参数
             list : [],
             is_hide : true,
             buy_num : {}
-        },   //购物车中的商品项
-        login : {   //登录信息
+        },                  //购物车中的商品项
+        login : {           //登录信息
             user_id : 1588,
             source : 2,
             username : "18850524539"
@@ -81,6 +81,38 @@ Page({
             goodArr = [],
             login = _date.login,
             res = wx.getStorageInfoSync();   //缓存信息
+
+        // var user = wx.getStorageSync('user');
+
+        // if (user) {
+
+        //     // 获取登录数据
+        //     login.user_id = user.user_id;
+        //     login.username = user.username;
+
+        //     _self.setData({
+        //         login : login
+        //     })
+
+        // }else{
+        // }
+        
+        
+        wx.getUserInfo({
+            withCredentials : true,
+            success: function(res) {
+                var userInfo = res.userInfo
+                var nickName = userInfo.nickName
+                var avatarUrl = userInfo.avatarUrl
+                var gender = userInfo.gender //性别 0：未知、1：男、2：女
+                var province = userInfo.province
+                var city = userInfo.city
+                var country = userInfo.country
+            },
+            fail : function(){
+                console.info("error")
+            }
+        })
 
         param.school_id = school_id;
         param.shop_id = shop_id;
@@ -109,7 +141,7 @@ Page({
         let timestamp = parseInt(new Date().getTime()/1000);
 
         // 授权
-        accessToken.getAccessToken(_date.uu_Sever,'api/order/schoolMarket/preview',login.user_id,'POST',param,_self.preview,timestamp,login.username,login.source);
+        //accessToken.getAccessToken(_date.uu_Sever,'api/order/schoolMarket/preview',login.user_id,'POST',param,_self.preview,timestamp,login.username,login.source);
 
     },
 
@@ -223,10 +255,10 @@ Page({
             }
         }
 
-        // _self.setData({
-        //     school_id : school_id,
-        //     shop_id : shop_id
-        // })
+        _self.setData({
+            school_id : school_id,
+            shop_id : shop_id
+        })
 
         // 请求店铺信息
 		_self.marketInfo();

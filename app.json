@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/selectProv/selectProv",
+    "pages/shoplist/shoplist",
     "pages/market/market",
     "pages/order/order",
     "pages/search/search",
-    "pages/selectProv/selectProv",
-    "pages/shoplist/shoplist",
     "pages/selectSchool/selectSchool",
     "pages/paySuccess/paySuccess"
   ],

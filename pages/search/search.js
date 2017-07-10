@@ -117,12 +117,11 @@ Page({
         	searchVal = data.searchVal,
             _height = data._height;
 
-       	// _self.setData({
-        //     school_id : school_id,
-        //     shop_id : shop_id
-        // })
-        // 
-
+       	_self.setData({
+            school_id : options.school_id,
+            shop_id : options.shop_id
+        })
+        
        	// 从链接上获取keyword
        	searchVal.val = options.keyword;
        	searchVal.is_hide = (options.keyword) ? true : false;
